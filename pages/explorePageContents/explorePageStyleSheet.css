@@ -1,0 +1,7 @@
+.card-columns {
+  column-count: 6;
+}
+
+.card {
+  margin-bottom: 20px;
+}
