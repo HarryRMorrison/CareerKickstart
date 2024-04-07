@@ -1,7 +1,41 @@
 .card-columns {
-  column-count: 6;
+  column-count: 5;
 }
 
 .card {
   margin-bottom: 20px;
+}
+
+#findRequests {
+  background-color: aliceblue;
+}
+
+#searchIn {
+  background-color: #cbd5d6;
+  outline-style: none;
+  outline-width: 1px;
+  border-style: none;
+  border-radius: 30px;
+  text-indent: 10px;
+}
+
+#submitButton {
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  border-radius: 40px;
+  margin-left: 6px;
+  background-color: rgb(81, 160, 252);
+  color: white;
+}
+
+.dropdown-toggle {
+  border-radius: 20px;
+  background-color: rgb(81, 160, 252);
+  border-style: none;
+  width: 13%;
+}
+
+.dropdown-toggle:hover, #submitButton:hover {
+  background-color: rgb(49, 82, 121);
 }
