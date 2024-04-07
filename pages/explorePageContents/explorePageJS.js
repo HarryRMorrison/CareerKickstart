@@ -73,8 +73,11 @@ function addDropdownFilters() {
 
 
 
-$(window).on("load", function() { insertMessages(30); addDropdownFilters()});
+$(window).on("load", function() { 
+    insertMessages(30);
+    addDropdownFilters();
+});
 
 $(document).ready(function () { 
-    
+
 }); 

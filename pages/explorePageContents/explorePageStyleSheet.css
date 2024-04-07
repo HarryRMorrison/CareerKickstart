@@ -7,7 +7,7 @@
 }
 
 #findRequests {
-  background-color: aliceblue;
+  background-color: white;
 }
 
 #searchIn {
@@ -19,23 +19,29 @@
   text-indent: 10px;
 }
 
-#submitButton {
-  width: 40px;
-  height: 40px;
-  align-self: center;
-  border-radius: 40px;
-  margin-left: 6px;
-  background-color: rgb(81, 160, 252);
-  color: white;
+#searchIn:hover {
+  background-color: #b2b5b6;
 }
 
-.dropdown-toggle {
+#resetButton, #submitButton {
+  width: 45px;
+  height: 45px;
+  align-self: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: rgb(81, 160, 252);
+  color: white;
+  margin-right: 6px;
+}
+
+.dropdown .dropdown-toggle {
   border-radius: 20px;
   background-color: rgb(81, 160, 252);
   border-style: none;
-  width: 13%;
+  width: 20%;
+  height: 45px;
 }
 
-.dropdown-toggle:hover, #submitButton:hover {
+.dropdown-toggle:hover, #submitButton:hover, #resetButton:hover{
   background-color: rgb(49, 82, 121);
 }
