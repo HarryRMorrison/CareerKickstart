@@ -45,6 +45,8 @@
   border-style: none;
   width: calc(89%/5);;
   height: 45px;
+}
+
 .dropdown-toggle:hover, #submitButton:hover, #resetButton:hover{
   background-color: rgb(49, 82, 121);
 }
