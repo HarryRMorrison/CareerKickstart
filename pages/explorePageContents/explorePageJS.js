@@ -65,12 +65,11 @@ function addDropdownFilters() {
         let $newFilters = $('<ul class="dropdown-menu" aria-labelledby="' + x + '"></ul>'); 
         for (let i = 0; i < filters[x].length; i++) {
             let filterName = filters[x][i];
-            $newFilters.append('<li><a class="dropdown-item"><label><input type="checkbox" name="  ' + filterName + ' ">' + filterName + '</label></a></li>');
+            $newFilters.append('<li><a class="dropdown-item"><label><input type="checkbox" name="  ' + filterName + ' ">  ' + filterName + '</label></a></li>');
         }
         $('#' + x).after($newFilters);
     }
 }
-
 
 
 $(window).on("load", function() { 
@@ -78,6 +77,6 @@ $(window).on("load", function() {
     addDropdownFilters();
 });
 
-$(document).ready(function () { 
-
-}); 
+$(document).ready(function() {
+     
+});

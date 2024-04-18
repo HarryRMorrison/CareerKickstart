@@ -6,6 +6,10 @@
   margin-bottom: 20px;
 }
 
+.card:hover {
+  transform: scale(1.01);
+}
+
 #findRequests {
   background-color: white;
 }
@@ -17,6 +21,7 @@
   border-style: none;
   border-radius: 30px;
   text-indent: 10px;
+  margin-left: 4px;
 }
 
 #searchIn:hover {
@@ -31,17 +36,15 @@
   border-radius: 40px;
   background-color: rgb(81, 160, 252);
   color: white;
-  margin-right: 6px;
+  margin-right: 8px;
 }
 
 .dropdown .dropdown-toggle {
-  border-radius: 20px;
+  border-radius: 30px;
   background-color: rgb(81, 160, 252);
   border-style: none;
-  width: 20%;
+  width: calc(89%/5);;
   height: 45px;
-}
-
 .dropdown-toggle:hover, #submitButton:hover, #resetButton:hover{
   background-color: rgb(49, 82, 121);
 }
