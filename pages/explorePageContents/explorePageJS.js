@@ -53,14 +53,11 @@ function getMessages(number) {
 function insertMessages(number) {
     let names = getMessages(number);
     let curr = 0;
-    for (let col = 0; col < 5; col++) {
-        let $column = $('#messageBoard').children().eq(col);
-        for (let i = 0 ; i < curr+number/3 ; i++) {
-            let $newCard = $('<div class="card">'); 
-            $newCard.html('<img src="'+names[i]+'" class="card-img-top img-fluid">'); 
-            $($column).append($newCard);
-            curr += 1;
-        }
+    let $column = $('#messageBoard').children();
+    for (let i = 0 ; i < number ; i++){
+        let $newCard = $('<div class="card">'); 
+        $newCard.html('<img src="'+names[i]+'" class="card-img-top img-fluid">');
+        $($column.eq(i%5)).append($newCard);
     }
 }
 
@@ -89,7 +86,7 @@ $(document).ready(function() {
         var bottomDistance = $(document).height() - scrollPosition;
       
         // Check if the distance from the bottom is 500px or less
-        if (bottomDistance <= 150) {
+        if (bottomDistance <= 500) {
             insertMessages(15);
         }
     });
