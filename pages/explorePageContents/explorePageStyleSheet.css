@@ -32,14 +32,14 @@
   align-self: center;
   align-items: center;
   border-radius: 40px;
-  background-color: rgb(81, 160, 252);
+  background-color: rgb(44, 122, 211);
   color: white;
   margin-right: 8px;
 }
 
-.dropdown .dropdown-toggle {
+.dropdown-center .dropdown-toggle {
   border-radius: 30px;
-  background-color: rgb(81, 160, 252);
+  background-color: rgb(44, 122, 211);
   border-style: none;
   width: calc((100% - 75px)/5);;
   height: 45px;

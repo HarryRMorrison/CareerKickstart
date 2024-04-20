@@ -55,7 +55,7 @@ function insertMessages(number) {
     let $column = $('#messageBoard').children();
     for (let i = 0 ; i < number ; i++){
         let $newCard = $('<div class="card">'); 
-        $newCard.html('<img src="'+names[i]+'" class="card-img-top img-fluid">');
+        $newCard.html('<img src="'+names[i]+'" class="card-img-top img-fluid rounded">');
         $($column.eq(i%5)).append($newCard);
     }
 }
