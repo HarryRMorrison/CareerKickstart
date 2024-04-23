@@ -1,0 +1,32 @@
+.navbar {
+    background-color: white;
+}
+
+.main-container {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.button, .navbar .nav-link {
+    width: auto;
+    height: 45px;
+    align-self: center;
+    align-items: center;
+    border-radius: 40px;
+    background-color: rgb(81, 160, 252);
+    color: white;
+    padding: 0 20px;
+    margin-right: 6px;
+}
+
+.button:hover, .navbar .nav-link:hover {
+    background-color: rgb(49, 82, 121);
+}
+
+h1, .text-muted {
+    color: #333;
+}
+
+.text-muted {
+    font-size: 1.2em;
+}
