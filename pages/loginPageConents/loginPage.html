@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #loginform, #signupform {
+              float:left;  
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/action_page.php" id="loginform"> <!--placeholder location-->
+            <label for="username">Username or email:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password"><br><br>
+            <input type="submit" value="Login">
+        </form> 
+        <form action="/action_page.php" id="signupform"> <!--placeholder location-->
+            <label for="email">Email address:</label><br>
+            <input type="text" id="email" name="email"><br>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password"><br><br>
+            <input type="submit" value="Sign Up">
+        </form> 
+    </body>
+</html>
