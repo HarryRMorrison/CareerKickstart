@@ -1,6 +1,6 @@
 :root {
-    --main-color: #b92b27;
-    --main-color-darker: #941e1a;
+    --main-color: rgb(49, 82, 121);
+    --main-color-darker: rgb(49, 82, 121);
     --white: #ffffff;
     --dropdown-radius: 50px;
   }
@@ -27,8 +27,7 @@
   #button1 {
     border-bottom-left-radius: var(--dropdown-radius);
     border-top-left-radius: var(--dropdown-radius);
-    align-self: center;
-    align-items: center;
+    
 }
 
 #button2 {
