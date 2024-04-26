@@ -11,7 +11,7 @@ def send_card_template():
     question_demo = {
         'title': "demo",
         'description': 'demo',
-        'tags': ["demo"],
+        'tags': [],
         'likes': 1,
         'comments': 1 
     }
@@ -20,6 +20,76 @@ def send_card_template():
 @app.route('/explore')
 def load_explorepage():
     posts = [
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
+        {
+            'title': "Hello dfgdrgnoerngoinoinger",
+            'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',
+            'tags': ["Accounting","Internship","Finance","Deloitte","Interviews"],
+            'likes': 4,
+            'comments': 1 
+        },
         {
             'title': "Hello dfgdrgnoerngoinoinger",
             'description': 'fgieorigneirngoienrgoenrgneorigoekrngoer igoierg oierjgoiehrgoiehr goierh goiehrgoiehrg oeihr goi Beautiful day in Portland!',

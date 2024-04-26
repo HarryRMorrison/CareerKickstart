@@ -1,11 +1,16 @@
 var totalQuestions = 0;
 
-
-function insertMessages(number) {
+function insertMessages(number, cardTemplate) {
+    console.log("here");
     let $column = $('#messageBoard').children();
     for (let i = 0 ; i < number ; i++){
-        $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
-        $($column.eq(i%5)).append($newCard);
+        let card = $(cardTemplate);
+        card.find(".card-title").html('<h6>'+'NewTitle'+'</h6>');
+        card.find(".card-subtitle").html('<p> Deloitte </p>');
+        card.find(".card-body").val('New Description');
+        card.find(".card-action").find('#like').html('<i class="fa fa-thumbs-o-up"></i>'+i);
+        card.find(".card-action").find('#comment').html('<i class="fa fa-comments-o"></i>'+i);
+        $($column.eq(i%4)).append(card);
     }
 }
 
@@ -21,10 +26,9 @@ function addDropdownFilters() {
     }
 }
 
-
 $(window).on("load", function() { 
     $.get("/getcard",function(data) {
-        const cardTemplate = data
+        cardTemplate = data;
     });
     addDropdownFilters();
 });
@@ -35,9 +39,9 @@ $(document).ready(function() {
         var scrollPosition = $(window).scrollTop() + $(window).height();
         var bottomDistance = $(document).height() - scrollPosition;
       
-        // Check if the distance from the bottom is 500px or less
+        // Check if the distance from the bottom is 1000px or less
         if (bottomDistance <= 1000) {
-            insertMessages(30);
+            insertMessages(30, cardTemplate);
         }
     });
 });
