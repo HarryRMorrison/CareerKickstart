@@ -1,7 +1,6 @@
 var totalQuestions = 0;
 
 function insertMessages(number, cardTemplate) {
-    console.log("here");
     let $column = $('#messageBoard').children();
     for (let i = 0 ; i < number ; i++){
         let card = $(cardTemplate);
@@ -27,9 +26,6 @@ function addDropdownFilters() {
 }
 
 $(window).on("load", function() { 
-    $.get("/getcard",function(data) {
-        cardTemplate = data;
-    });
     addDropdownFilters();
 });
 
@@ -41,7 +37,9 @@ $(document).ready(function() {
       
         // Check if the distance from the bottom is 1000px or less
         if (bottomDistance <= 1000) {
-            insertMessages(30, cardTemplate);
+            $.get("/getcard",function(responseText) {
+                insertMessages(30, responseText);
+            });
         }
     });
 });
