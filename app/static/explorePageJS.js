@@ -1,5 +1,6 @@
 var totalQuestions = 0;
 
+
 function insertMessages(number) {
     let $column = $('#messageBoard').children();
     for (let i = 0 ; i < number ; i++){
@@ -22,7 +23,9 @@ function addDropdownFilters() {
 
 
 $(window).on("load", function() { 
-    insertMessages(30);
+    $.get("/getcard",function(data) {
+        const cardTemplate = data
+    });
     addDropdownFilters();
 });
 

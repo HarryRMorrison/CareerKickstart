@@ -6,6 +6,17 @@ from app import app
 def index():
     return "Hello, World!"
 
+@app.route('/getcard', methods = ['GET'])
+def send_card_template():
+    question_demo = {
+        'title': "demo",
+        'description': 'demo',
+        'tags': ["demo"],
+        'likes': 1,
+        'comments': 1 
+    }
+    return render_template('card.html', question=question_demo)
+
 @app.route('/explore')
 def load_explorepage():
     posts = [
