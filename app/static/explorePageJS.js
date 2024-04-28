@@ -7,8 +7,8 @@ function insertMessages(number, cardTemplate) {
         card.find(".card-title").html('<h6>'+'NewTitle'+'</h6>');
         card.find(".card-subtitle").html('<p> Deloitte </p>');
         card.find(".card-body").val('New Description');
-        card.find(".card-action").find('#like').html('<i class="fa fa-thumbs-o-up"></i>'+i);
-        card.find(".card-action").find('#comment').html('<i class="fa fa-comments-o"></i>'+i);
+        card.find(".card-action").find('#like').html('<i class="fa fa-thumbs-o-up"></i> '+i);
+        card.find(".card-action").find('#comment').html('<i class="fa fa-comments-o"></i> '+i);
         $($column.eq(i%4)).append(card);
     }
 }
