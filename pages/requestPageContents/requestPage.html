@@ -36,13 +36,14 @@
                 <div class="row">
                     <div class="col">
                         <img class="profile rounded-circle " src="PicturesForRequestPage/TestPfP.jpeg">
-                        <input class="w-75 border-gray text-gray-dark rounded-pill bg-light ps-2 text-start" type="button" value="Enter Question here">
+                        <input type="text" placeholder="Enter Question here">
                     </div>
                 </div>
                 <div class="row text-gray-darker pb-2 ps-4 pe-4">
                     <div class="col text-center border-end hover-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16h-4.83l-.59.59L12 20.17l-1.59-1.59-.58-.58H5V4h14v14zm-8-3h2v2h-2zm1-8c1.1 0 2 .9 2 2 0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4S8 6.79 8 9h2c0-1.1.9-2 2-2z"/></svg>
                         <span>Ask</span>
+                        </script>
                     </div>
                     <div class="col text-center border-end hover-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><rect fill="none" height="24" width="24"/><path d="M3,10h11v2H3V10z M3,8h11V6H3V8z M3,16h7v-2H3V16z M18.01,12.87l0.71-0.71c0.39-0.39,1.02-0.39,1.41,0l0.71,0.71 c0.39,0.39,0.39,1.02,0,1.41l-0.71,0.71L18.01,12.87z M17.3,13.58l-5.3,5.3V21h2.12l5.3-5.3L17.3,13.58z"/></svg>
@@ -79,6 +80,37 @@
                             Answer to question displayed here  
                     </div>
                 </div>
+
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                    }
+            
+                    .container {
+                        display: block;
+                        text-align: center;
+                        margin-top: 20px;
+                    }
+            
+                    .input-field {
+                        width: 200px;
+                        padding: 8px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        margin: 10px auto;
+                    }
+            
+                    .add-button {
+                        padding: 8px 20px;
+                        background-color: green;
+                        color: #fff;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                </style>
+
                 <div class="post-footer p-2">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="left-button post-button bg-second-color border-0 text-black p-1">
@@ -87,10 +119,27 @@
                         </button>
                         <button type="button" class="right-button post-button bg-second-color border-0 text-black p-1">
                             <img src="PicturesForRequestPage/down.png" width="20" class="me-2">
-                        <button type="button" class="post-button post-button-bg border-0 rounded-circle text-black p-1">
+                        <button type="button" class="post-button post-button-bg border-0 rounded-circle text-black p-1" onclick="addFn()">
                             <img src="PicturesForRequestPage/reply.png" width="25" class="p-1">
-                            4
+                            <div id="inputFields"></div>
+                            
+                            <script>
+                                function addFn() {
+                                    const divEle = document.getElementById("inputFields");
+                                    const wrapper = document.createElement("div");
+                                    const iFeild = document.createElement("input");
+                                    iFeild.setAttribute("type", "text");
+                                    iFeild.setAttribute("placeholder", "Type answer here");
+                                    iFeild.classList.add("input-field");
+                                    wrapper.appendChild(iFeild);
+                                    divEle.appendChild(wrapper);
+                                }
+                            </script>
+
+
+                            
                         </button>
 
     </body>
 </html>
+
