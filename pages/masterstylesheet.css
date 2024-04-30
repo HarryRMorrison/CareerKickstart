@@ -5,14 +5,13 @@
     border-style: none;
     border-radius: 30px;
     text-indent: 10px;
-    width: auto; /* Auto width for flexibility, adjust as needed */
+    width: auto;
 }
 
 #searchIn:hover {
     background-color: #b2b5b6;
 }
 
-/* Ensuring that the form and search input are centered */
 .mx-auto {
-    max-width: 500px; /* Limit the max width of the centered form */
+    max-width: 500px;
 }
