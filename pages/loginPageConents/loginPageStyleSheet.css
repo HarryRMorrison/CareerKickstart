@@ -1,0 +1,24 @@
+button {
+    width: auto;
+    height: 45px;
+    align-self: center;
+    align-items: center;
+    border-radius: 40px;
+    background-color: rgb(81, 160, 252);
+    color: white;
+    padding: 0 20px;
+    margin-right: 6px;
+}
+
+.submit:hover {
+    background-color: rgb(49, 82, 121);
+}
+
+label {
+    color: #333;
+}
+
+#loginform, #signupform {
+    float:left;
+    width: 50%;  
+  }
