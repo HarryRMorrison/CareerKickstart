@@ -7,10 +7,10 @@ class Tag(db.Model):
     __tablename__ = 'tags'
     tag_id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     tag = sa.Column(sa.String(40), unique=True)
-    questions = so.relationship('Question', secondary='question_tags')
+    question_tags = db.relationship('Question_Tag', backref='on_question', lazy=True)
 
     def __repr__(self):
-        return '<Tag {}>'.format(self.tag)
+        return '[<Tag_id {}> <Tag {}>]'.format(self.tag_id, self.tag)
     
 class User(db.Model):
     __tablename__ = 'users'
@@ -18,9 +18,11 @@ class User(db.Model):
     username = sa.Column(sa.String(30))
     email = sa.Column(sa.String(100))
     password = sa.Column(sa.String(50))
+    questions = db.relationship('Question', backref='q_author', lazy=True)
+    answers = db.relationship('Answer', backref='a_author', lazy=True)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
     
 class Question(db.Model):
     __tablename__ = 'questions'
@@ -31,7 +33,8 @@ class Question(db.Model):
     date_created = sa.Column(sa.DateTime, default=func.now())
     likes = sa.Column(sa.Integer)
     comments = sa.Column(sa.Integer)
-    tags = so.relationship('Tag', secondary='question_tags')
+    tags = db.relationship('Question_Tag', backref='has_tags', lazy=True)
+    answers = db.relationship('Answer', backref='has_answers', lazy=True)
 
     def __repr__(self):
         return f'''[
@@ -47,11 +50,12 @@ class Question(db.Model):
     
 class Question_Tag(db.Model):
     __tablename__ = 'question_tags'
+    qt_id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     question_id = sa.Column(sa.Integer, sa.ForeignKey(Question.question_id))
     tag_id = sa.Column(sa.Integer, sa.ForeignKey(Tag.tag_id))
 
     def __repr__(self):
-        return '<Tag_id {}> <Question_id {}>'.format(self.tag_id, self.question_id)
+        return '[<Tag_id {}> <Question_id {}>]'.format(self.tag_id, self.question_id)
     
 class Answer(db.Model):
     __tablename__ = 'answers'
