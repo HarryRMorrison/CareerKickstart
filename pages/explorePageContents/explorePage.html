@@ -14,28 +14,31 @@
 
     </header>
     <body>
-      <div id="findRequests" class="container-fluid p-2 sticky-top bg-light">
-        <div class="container" id="searchBar"> <!-- This container will center the content -->
-            <form action="/action_page.php">
-                <div id="searchBar" class="mb-2 mt-2 d-flex">
-                    <button type="submit" id="submitButton"class="btn"></button>
-                    <input type="search" class="form-control" id="searchIn" placeholder="Search" name="searchBar">
-                </div>
-                <div class="dropdown">
-                    <button type="reset" id="resetButton" class="btn"></button>
-                    <button class="btn btn-success dropdown-toggle" type="button" id="companyDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Company</button> 
-                    <button class="btn btn-success dropdown-toggle" type="button" id="roleDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Role</button>
-                    <button class="btn btn-success dropdown-toggle" type="button" id="disciplineDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Discipline</button>
-                    <button class="btn btn-success dropdown-toggle" type="button" id="industryDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Industry</button>
-                </div>    
-            </form>
+        <div id="findRequests" class="container-fluid p-2 sticky-top bg-light">
+            <div class="container" id="searchBar"> <!-- This container will center the content -->
+                <form action="/action_page.php">
+                    <div id="searchBar" class="mb-2 mt-2 d-flex">
+                        <button type="submit" id="submitButton" class="btn"></button>
+                        <input type="search" class="form" id="searchIn" placeholder="Search..." name="searchBar">
+                    </div>
+                    <div class="dropdown-center">
+                        <button type="reset" id="resetButton" class="btn"></button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="companyDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Company</button> 
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="roleDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Role</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="disciplineDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Discipline</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="industryDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Industry</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="topicDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Topic</button>
+                    </div>    
+                </form>
+            </div>
         </div>
-    </div>
         <main>
-            <div class="container-fluid mt-4">
-                <div id = "messageBoard" class="card-columns">
-
-                </div>
+            <div id = "messageBoard" class="container-fluid mt-4 row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
             </div>
         </main>
     </body>
