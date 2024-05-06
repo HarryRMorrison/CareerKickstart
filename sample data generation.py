@@ -1,9 +1,18 @@
 from faker import Faker
+import lorem
+import random
+from app import app, db
+import sqlalchemy as sa
+from app.models import User, Tag, Question, Answer, Question_Tag
 
+questions = []
+questionTags = []
+answers = []
 fake = Faker()
+tags = []
+users = []
 
 # Generate 100 users
-users = []
 for _ in range(100):
     username = fake.user_name()
     email = fake.email()
@@ -70,32 +79,49 @@ tag = {
 'role': ['Intern','Graduate'],
 'disciplines': ["Biology","Computer Science","Economics","Mechanical Engineering","Psychology","English Literature","Political Science","Chemistry","History","Mathematics"]
 }
-tags = []
+
 
 for drop in tag.keys():
     for tagz in tag[drop]:
         tags.append({'category':drop, 'tag':tagz})
 
-
-import lorem
-import random
-
 descriptions = [lorem.paragraph() for _ in range(50)]
 answerz = [lorem.paragraph() for _ in range(240)]
 
-questions = []
-questionTags = []
-answers = []
-
 for i in range(len(titles)):
-    comb = {"title":titles[i], "description":descriptions[i], "likes":random.randint(0, 49), "comments":random.randint(0, 49), 'user_id':random.randint(0, 49)}
+    com = random.randint(0, 6)
+    comb = {"title":titles[i], "description":descriptions[i], "likes":random.randint(0, 49), "comments":com, 'user_id':random.randint(0, 49)}
     questions.append(comb)
     for num in [random.randint(0, 48) for _ in range(random.randint(1, 6))]:
         questionTags.append({'question_id':i,'tag_id':num})
+    for j in [random.randint(0, 239) for _ in range(com)]:
+        print(type(i))
+        comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(0, 49)}
+        answers.append(comb)
 
-for i in range(len(answerz)):
-    comb = {"answer":answerz[i], "likes":random.randint(0, 49), "comments":random.randint(0, 49), 'user_id':random.randint(0, 49)}
-    answers.append(comb)
+app.app_context().push()
 
-for ele in questionTags:
-    print(ele)
+for row in tags:
+    t = Tag(tag=row['tag'], category=row['category'])
+    db.session.add(t)
+db.session.commit()
+
+for row in users:
+    u = User(username=row['username'], email=row['email'], password = row['password'])
+    db.session.add(u)
+db.session.commit()
+
+for row in questions:
+    q = Question(title=row['title'], description=row['description'], likes=row['likes'], comments=row['comments'], user_id=row['user_id'])
+    db.session.add(q)
+db.session.commit()
+
+for row in answers:
+    a = Answer(answer=row['answer'], likes=row['likes'], user_id=row['user_id'])
+    db.session.add(a)
+db.session.commit()
+
+for row in questionTags:
+    qt = Tag(question_id=row['question_id'], tag_id=row['tag_id'])
+    db.session.add(qt)
+db.session.commit()

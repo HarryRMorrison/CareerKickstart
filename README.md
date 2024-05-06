@@ -1,4 +1,4 @@
-# Pair Up!
+# CareerKickstart
 Welcome to CareerKickstart, the dedicated platform for interns and graduates seeking guidance in the early stages of their careers. At CareerKickstart, we recognize the challenges that come with transitioning from academic life to professional environments, and we are committed to providing the support necessary for you to navigate this journey effectively.
 
 Our website offers a range of resources specifically designed for those entering the workforce. Whether you're searching for your first internship, a graduate position, or simply exploring different career options, CareerKickstart is here to assist you. We provide practical advice, professional insights, and a wealth of information to help enhance your job search skills.
