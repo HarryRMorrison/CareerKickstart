@@ -2,7 +2,6 @@ from faker import Faker
 import lorem
 import random
 from app import app, db
-import sqlalchemy as sa
 from app.models import User, Tag, Question, Answer, Question_Tag
 
 questions = []
@@ -121,6 +120,6 @@ try:
         qt = Question_Tag(question_id=row['question_id'], tag_id=row['tag_id'])
         db.session.add(qt)
 except:
-    db.session.rollback()
+    raise Exception("An error occurred.")
 else:
     db.session.commit()
