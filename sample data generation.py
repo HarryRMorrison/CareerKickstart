@@ -95,33 +95,32 @@ for i in range(len(titles)):
     for num in [random.randint(0, 48) for _ in range(random.randint(1, 6))]:
         questionTags.append({'question_id':i,'tag_id':num})
     for j in [random.randint(0, 239) for _ in range(com)]:
-        print(type(i))
         comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(0, 49)}
         answers.append(comb)
 
 app.app_context().push()
 
-for row in tags:
-    t = Tag(tag=row['tag'], category=row['category'])
-    db.session.add(t)
-db.session.commit()
+try:
+    for row in tags:
+        t = Tag(tag=row['tag'], category=row['category'])
+        db.session.add(t)
 
-for row in users:
-    u = User(username=row['username'], email=row['email'], password = row['password'])
-    db.session.add(u)
-db.session.commit()
+    for row in users:
+        u = User(username=row['username'], email=row['email'], password = row['password'])
+        db.session.add(u)
 
-for row in questions:
-    q = Question(title=row['title'], description=row['description'], likes=row['likes'], comments=row['comments'], user_id=row['user_id'])
-    db.session.add(q)
-db.session.commit()
+    for row in questions:
+        q = Question(title=row['title'], description=row['description'], likes=row['likes'], comments=row['comments'], user_id=row['user_id'])
+        db.session.add(q)
 
-for row in answers:
-    a = Answer(answer=row['answer'], likes=row['likes'], user_id=row['user_id'])
-    db.session.add(a)
-db.session.commit()
+    for row in answers:
+        a = Answer(answer=row['answer'], likes=row['likes'], user_id=row['user_id'])
+        db.session.add(a)
 
-for row in questionTags:
-    qt = Tag(question_id=row['question_id'], tag_id=row['tag_id'])
-    db.session.add(qt)
-db.session.commit()
+    for row in questionTags:
+        qt = Question_Tag(question_id=row['question_id'], tag_id=row['tag_id'])
+        db.session.add(qt)
+except:
+    db.session.rollback()
+else:
+    db.session.commit()

@@ -21,8 +21,8 @@ class User(db.Model):
     email = db.Column(db.String(100))
     password = db.Column(db.String(50))
 
-    user_questions = db.relationship('Question', back_populates='author', lazy=True)
-    user_answers = db.relationship('Answer', back_populates='author', lazy=True)
+    user_questions = db.relationship('Question', back_populates='user', lazy=True)
+    user_answers = db.relationship('Answer', back_populates='user', lazy=True)
 
     def __repr__(self):
         return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
@@ -37,9 +37,9 @@ class Question(db.Model):
     likes = db.Column(db.Integer)
     comments = db.Column(db.Integer)
 
-    author = db.relationship('User', back_populates='user_questions')
+    user = db.relationship('User', back_populates='user_questions')
     tags = db.relationship('Question_Tag', back_populates='question', lazy=True)
-    q_answers = db.relationship('Answer', back_populates='question', lazy=True)
+    answers = db.relationship('Answer', back_populates='question', lazy=True)
 
     def __repr__(self):
         return f'''[
@@ -74,8 +74,8 @@ class Answer(db.Model):
     date_created = db.Column(db.DateTime, default=func.now())
     likes = db.Column(db.Integer)
 
-    author = db.relationship('User', back_populates='user_answers')
-    question = db.relationship('Question', back_populates='q_answers')
+    user = db.relationship('User', back_populates='user_answers')
+    question = db.relationship('Question', back_populates='answers')
 
     def __repr__(self):
         return f'''
