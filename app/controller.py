@@ -9,7 +9,7 @@ class PostController():
         top_questions = (
             db.session.query(Question)
             .order_by((Question.likes + Question.comments).desc())
-            .limit(30)
+            .limit(28)
             .all()
         )
         return render_template("explorePage.html", posts=top_questions)
@@ -18,8 +18,8 @@ class PostController():
         next_set = (
             db.session.query(Question)
             .order_by((Question.likes + Question.comments).desc())
-            .offset((page_num*30)-1)
-            .limit(30)
+            .offset((page_num*28)-1)
+            .limit(28)
             .all()
         )
         next_posts = [question.to_dict() for question in next_set]

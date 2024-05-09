@@ -1,0 +1,32 @@
+{% extends "explorePage.html" %}
+
+{% block header %}
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand" href="/">
+                <img src="/app/assets/logo v1.png" alt="CareerKickstart" height="70px">
+            </a>
+            
+            <form class="d-flex" id="searchBar" class="mb-2 mt-2 d-flex" role="search">
+                <button type="submit" id="submitButton" class="btn"><i class="fa fa-search"></i></button>
+                <input type="search" class="form" id="searchIn" placeholder="Search..." name="searchBar">
+            </form>
+
+            <div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/explore">Explore</a></li>
+                        <li class="nav-item"><a class="nav-link">Create</a></li>
+                        <li class="nav-item"><a class="nav-link">Login/Sign up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+{% endblock %}

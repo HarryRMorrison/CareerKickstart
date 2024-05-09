@@ -1,17 +1,17 @@
 var pages = 1;
+var isLoading = false;
+var tracker = 28;
 
 function getQuestions(){
     $.get("/explore/" + pages, function(responseText) {
         insertMessages(responseText);
     });
-    pages += 1;
-    console.log(pages)
     return 
 }
 
 function insertMessages(newQuestions) {
     let $column = $('#messageBoard').children();
-    for (let i = 0 ; i < 30 ; i++){
+    for (let i = 0 ; i < 28 ; i++){
         let post = newQuestions[i];
         let $newCard = $('<div class="card">');
         let $titleCard = $('<div class="card-title">').html('<h6>'+post.title+'</h6>');
@@ -23,6 +23,9 @@ function insertMessages(newQuestions) {
         let $actionCard = $('<div class="card-action d-flex">').html('<button id="like" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button id="comment" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
         $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
         $($column.eq(i%4)).append($newCard);
+        tracker += 1;
+        console.log([tracker, i%4])
+        isLoading = false;
     }
     return
 }
@@ -50,8 +53,10 @@ $(document).ready(function() {
         var bottomDistance = $(document).height() - scrollPosition;
       
         // Check if the distance from the bottom is 1000px or less
-        if (bottomDistance <= 50) {
+        if (bottomDistance <= 1000 && isLoading == false) {
+            isLoading = true;
             getQuestions();
+            pages += 1;
         }
     });
 });
