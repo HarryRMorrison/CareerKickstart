@@ -1,16 +1,30 @@
-var totalQuestions = 0;
+var pages = 1;
 
-function insertMessages(number, cardTemplate) {
+function getQuestions(){
+    $.get("/explore/" + pages, function(responseText) {
+        insertMessages(responseText);
+    });
+    pages += 1;
+    console.log(pages)
+    return 
+}
+
+function insertMessages(newQuestions) {
     let $column = $('#messageBoard').children();
-    for (let i = 0 ; i < number ; i++){
-        let card = $(cardTemplate);
-        card.find(".card-title").html('<h6>'+'NewTitle'+'</h6>');
-        card.find(".card-subtitle").html('<p> Deloitte </p>');
-        card.find(".card-body").val('New Description');
-        card.find(".card-action").find('#like').html('<i class="fa fa-thumbs-o-up"></i> '+i);
-        card.find(".card-action").find('#comment').html('<i class="fa fa-comments-o"></i> '+i);
-        $($column.eq(i%4)).append(card);
+    for (let i = 0 ; i < 30 ; i++){
+        let post = newQuestions[i];
+        let $newCard = $('<div class="card">');
+        let $titleCard = $('<div class="card-title">').html('<h6>'+post.title+'</h6>');
+        let $subCard = $('<div class="card-subtitle d-flex">');
+        post.tags.forEach(tag => {
+            $subCard.append($('<p>').text(tag));
+        });
+        let $textCard = $('<div class="card-body">').html('<p class="card-text">'+post.description+'</p>');
+        let $actionCard = $('<div class="card-action d-flex">').html('<button id="like" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button id="comment" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
+        $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
+        $($column.eq(i%4)).append($newCard);
     }
+    return
 }
 
 
@@ -36,10 +50,8 @@ $(document).ready(function() {
         var bottomDistance = $(document).height() - scrollPosition;
       
         // Check if the distance from the bottom is 1000px or less
-        if (bottomDistance <= 1000) {
-            $.get("/getcard",function(responseText) {
-                insertMessages(30, responseText);
-            });
+        if (bottomDistance <= 50) {
+            getQuestions();
         }
     });
 });

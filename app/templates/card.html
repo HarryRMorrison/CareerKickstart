@@ -3,8 +3,8 @@
         <h6>{{question.title}}</h6>
     </div>
     <div class="card-subtitle d-flex">
-        {% for tag in question.tags %}
-        <p> {{tag}} </p>
+        {% for itag in question.tags %}
+        <p> {{itag.tag.tag}} </p>
         {% endfor %}
     </div>
     <div class="card-body">

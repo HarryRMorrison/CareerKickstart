@@ -1,17 +1,16 @@
 from flask import render_template
 from app import app
+from app.controller import PostController
 
 @app.route('/')
-@app.route('/index')
+@app.route('/home')
 def index():
     return "Hello, World!"
 
-@app.route('/getcard', methods = ['GET'])
-def send_card_template():
-    question_demo = {}
-    return render_template('card.html', question=question_demo)
-
 @app.route('/explore')
 def load_explorepage():
-    posts = []
-    return render_template("explorePage.html", posts=posts)
+    return PostController.get_top_questions()
+
+@app.route('/explore/<int:page>')
+def get_next_questions(page):
+    return PostController.get_next_question_set(page)

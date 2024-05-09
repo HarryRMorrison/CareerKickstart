@@ -11,8 +11,12 @@ fake = Faker()
 tags = []
 users = []
 
+USERS = 200
+Q_NUM = 500
+A_NUM = 1000
+
 # Generate 100 users
-for _ in range(100):
+for _ in range(USERS):
     username = fake.user_name()
     email = fake.email()
     password = fake.password(length=12, special_chars=True, digits=True, upper_case=True, lower_case=True)
@@ -68,8 +72,59 @@ titles = [
     "What are the typical steps in a graduate school application process?",
     "How can I prepare for aptitude tests commonly used in job screenings?",
     "What are some ethical considerations in business management?",
-    "How can I effectively use project management software to enhance team collaboration?"
+    "How can I effectively use project management software to enhance team collaboration?",
+    "What strategies can I use to improve my networking skills?",
+    "How important are personal projects in tech job applications?",
+    "Can anyone provide advice on handling panel interviews?",
+    "What are effective ways to showcase soft skills on a resume?",
+    "How do I prepare for a marketing role interview?",
+    "What should I know about the corporate culture before joining a company?",
+    "Can anyone suggest how to create a professional portfolio for a creative industry?",
+    "What are some strategies for succeeding in asynchronous video interviews?",
+    "How do I handle rejections after several job interviews?",
+    "What are some best practices for virtual networking?",
+    "How can I enhance my problem-solving skills for technical interviews?",
+    "What are the latest trends in AI and machine learning job roles?",
+    "Can someone share effective ways to research a company before an interview?",
+    "How do I manage career growth expectations in my first job?",
+    "What are some tips for transitioning from a non-tech role to a tech role?",
+    "How can I negotiate benefits in addition to salary?",
+    "What are the key considerations for accepting a job offer abroad?",
+    "How do I approach career development in a small company versus a large corporation?",
+    "What are some tips for maintaining work-life balance in high-pressure jobs?",
+    "How can I improve my interview skills over video calls?",
+    "What are some common errors in CVs and resumes?",
+    "How do I leverage alumni networks for job search success?",
+    "What are some questions to ask a future manager during an interview?",
+    "How do I write a cover letter for a career change?",
+    "What are the best practices for using social media in job searches?",
+    "How can I develop leadership skills early in my career?",
+    "What are some effective negotiation techniques for entry-level positions?",
+    "How do I prepare for a performance review?",
+    "What are some effective ways to increase visibility in my current role?",
+    "How can I ask for a promotion or raise in a professional way?",
+    "What are some challenges of working remotely and how can I overcome them?",
+    "How do I set realistic career goals?",
+    "What are some tips for effective email communication in professional settings?",
+    "How can I ensure continuous professional development in my field?",
+    "What are some best practices for conducting informational interviews?",
+    "How do I handle job application follow-ups?",
+    "What are some tips for cold emailing potential employers?",
+    "How do I build confidence for public speaking?",
+    "What are some common behavioral interview questions and effective responses?",
+    "How can I use volunteer experience to enhance my resume?",
+    "What are some strategies for developing a professional brand?",
+    "How can I handle unexpected questions in a job interview?",
+    "What are some effective strategies for stress management during job transitions?",
+    "How can I effectively manage a team remotely?",
+    "What are some tips for successful project management in cross-functional teams?",
+    "How do I balance detail-oriented tasks with big-picture strategy in my job?",
+    "What are some effective conflict resolution strategies in the workplace?",
+    "How can I develop a strong professional network early in my career?",
+    "What are some advanced tips for LinkedIn networking and job search?",
+    "How do I transition from a technical role to a management role?"
 ]
+titles = titles * 5
 
 tag = {
 'companies': ["Apple","Microsoft","Amazon","Google","Facebook","Tesla","Berkshire Hathaway","Johnson & Johnson","Walmart","Visa","PwC","JPMorgan","Deloitte","Intel","KPMG","Telstra","ANZ","Chevron","Boeing","BHP"],
@@ -84,17 +139,17 @@ for drop in tag.keys():
     for tagz in tag[drop]:
         tags.append({'category':drop, 'tag':tagz})
 
-descriptions = [lorem.paragraph() for _ in range(50)]
-answerz = [lorem.paragraph() for _ in range(240)]
+descriptions = [lorem.paragraph() for _ in range(Q_NUM)]
+answerz = [lorem.paragraph() for _ in range(A_NUM)]
 
 for i in range(len(titles)):
     com = random.randint(0, 6)
-    comb = {"title":titles[i], "description":descriptions[i], "likes":random.randint(0, 49), "comments":com, 'user_id':random.randint(0, 49)}
+    comb = {"title":titles[i], "description":descriptions[i], "likes":random.randint(0, 49), "comments":com, 'user_id':random.randint(1, USERS)}
     questions.append(comb)
-    for num in [random.randint(0, 48) for _ in range(random.randint(1, 6))]:
+    for num in [random.randint(1, 45) for _ in range(random.randint(1, 6))]:
         questionTags.append({'question_id':i,'tag_id':num})
-    for j in [random.randint(0, 239) for _ in range(com)]:
-        comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(0, 49)}
+    for j in [random.randint(1, A_NUM) for _ in range(com)]:
+        comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(1, USERS)}
         answers.append(comb)
 
 app.app_context().push()
