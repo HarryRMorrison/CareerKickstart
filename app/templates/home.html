@@ -14,13 +14,11 @@
     </head>
     <body>
         {% include "navbar.html" %}
-        <main class="container mt-5">
-            <div class="hero-image" style="background-image:url('your_image_path_here.jpg'); height: 300px; background-size: cover; background-position: center;">
-                <div class="text-center" style="padding-top: 100px;">
-                    <h1>Career Kickstart</h1>
-                    <p class="text-muted">Search for career help!</p>
-                    <a href="http://127.0.0.1:5500/pages/explorePageContents/explorePage.html" class="btn btn-primary">Explore Now</a>
-                </div>
+        <main class="container-fluid mt-5" style="background-image:url('./static/career-development.png'); height: 450px;">
+            <div class="text-center align-items-center">
+                <h1 class="text-white">Career Kickstart</h1>
+                <p class="text-white">Search for career help!</p>
+                <a href="/explore" class="btn btn-primary">Explore Now</a>
             </div>
         </main>
         <div class="container mt-4"> <!-- featured topics section -->
@@ -28,7 +26,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="Graduate forum.jpg" alt="Graduate Forum">
+                        <img class="card-img-top" src="{{ url_for('static', filename='graduate.jpg') }}" alt="Graduate Forum">
                         <div class="card-body">
                             <h5 class="card-title">Find Help in Our Graduate Forum</h5>
                             <p class="card-text">Get advice on how to win the graduate job of your choice.</p>
@@ -38,7 +36,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="internship_opportunities.jpg" alt="Internship Opportunities">
+                        <img class="card-img-top" src="{{ url_for('static', filename='internship.jpg') }}" alt="Internship Opportunities">
                         <div class="card-body">
                             <h5 class="card-title">Internship Opportunities</h5>
                             <p class="card-text">Discover new internship openings and application tips.</p>
@@ -48,7 +46,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="Application Aid.jpg" alt="Application Aid">
+                        <img class="card-img-top" src="{{ url_for('static', filename='resume.jpeg') }}" alt="Application Aid">
                         <div class="card-body">
                             <h5 class="card-title">Application Aid</h5>
                             <p class="card-text">Learn effective strategies to ace your application and interview.</p>
