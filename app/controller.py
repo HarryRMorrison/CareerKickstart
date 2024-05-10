@@ -24,3 +24,23 @@ class PostController():
         )
         next_posts = [question.to_dict() for question in next_set]
         return next_posts
+    
+class SearchController():
+
+    def get_tags():
+        role = db.session.query(Tag.tag).filter(Tag.category == "role").all()
+        company = db.session.query(Tag.tag).filter(Tag.category == "companies").all()
+        discipline = db.session.query(Tag.tag).filter(Tag.category == "disciplines").all()
+        industry = db.session.query(Tag.tag).filter(Tag.category == "industry").all()
+        topic = db.session.query(Tag.tag).filter(Tag.category == "topics").all()
+        tags = {}
+        tags['role'] = [itag[0] for itag in role]
+        tags['company'] = [itag[0] for itag in company]
+        tags['discipline'] = [itag[0] for itag in discipline]
+        tags['industry'] = [itag[0] for itag in industry]
+        tags['topic'] = [itag[0] for itag in topic]
+        return tags
+
+    def search_func(search):
+        print(Question.query.whoosh_search(search).all())
+        return search

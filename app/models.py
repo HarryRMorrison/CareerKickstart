@@ -1,5 +1,3 @@
-import sqlalchemy as sa
-import sqlalchemy.orm as so
 from sqlalchemy.sql import func
 from app import db
 
@@ -31,7 +29,7 @@ class Question(db.Model):
     __tablename__ = 'questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=False, index=True)
     description = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
     likes = db.Column(db.Integer)
@@ -52,6 +50,9 @@ class Question(db.Model):
         Comments:{self.comments}
         ]'''
     
+    def associated_tags(self):
+        return [itag.tag.tag for itag in self.tags]
+
     def to_dict(self):
         tagz = [itag.tag.tag for itag in self.tags]
         return {'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username}

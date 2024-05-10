@@ -1,10 +1,16 @@
 var pages = 1;
 var isLoading = false;
-var tracker = 28;
 
 function getQuestions(){
-    $.get("/explore/" + pages, function(responseText) {
+    $.get("/explore" + pages, function(responseText) {
         insertMessages(responseText);
+    });
+    return 
+}
+
+function getDropdownFilters(){
+    $.get("/filter-retrieve", function(responseText) {
+        insertDropdownFilters(responseText);
     });
     return 
 }
@@ -23,27 +29,25 @@ function insertMessages(newQuestions) {
         let $actionCard = $('<div class="card-action d-flex">').html('<button id="like" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button id="comment" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
         $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
         $($column.eq(i%4)).append($newCard);
-        tracker += 1;
-        console.log([tracker, i%4])
         isLoading = false;
     }
     return
 }
 
 
-function addDropdownFilters() {
+function insertDropdownFilters(filters) {
     for (let x in filters) {
-        let $newFilters = $('<ul class="dropdown-menu" aria-labelledby="' + x + '"></ul>'); 
+        let $newFilters = $('<ul class="dropdown-menu" aria-labelledby="' + x + 'Dropdown"></ul>'); 
         for (let i = 0; i < filters[x].length; i++) {
             let filterName = filters[x][i];
             $newFilters.append('<li><a class="dropdown-item"><label><input type="checkbox" name="  ' + filterName + ' ">  ' + filterName + '</label></a></li>');
         }
-        $('#' + x).after($newFilters);
+        $('#' + x + 'Dropdown').after($newFilters);
     }
 }
 
 $(window).on("load", function() { 
-    addDropdownFilters();
+    getDropdownFilters();
 });
 
 $(document).ready(function() {
