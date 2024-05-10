@@ -12,7 +12,7 @@ class PostController():
             .limit(28)
             .all()
         )
-        return render_template("explorePage.html", posts=top_questions)
+        return render_template("explore.html", posts=top_questions)
     
     def get_next_question_set(page_num):
         next_set = (

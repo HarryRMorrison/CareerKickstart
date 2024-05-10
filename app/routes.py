@@ -1,11 +1,11 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 from app import app
 from app.controller import PostController
 
 @app.route('/')
 @app.route('/home')
 def index():
-    return "Hello, World!"
+    return render_template('home.html')
 
 @app.route('/explore')
 def load_explorepage():
