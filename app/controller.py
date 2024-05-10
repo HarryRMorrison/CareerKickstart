@@ -1,6 +1,7 @@
 from app import app, db
 from app.models import User, Tag, Question, Answer, Question_Tag
-import sqlalchemy as sa
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from flask import render_template
 
 class PostController():
@@ -42,5 +43,18 @@ class SearchController():
         return tags
 
     def search_func(search):
-        print(Question.query.whoosh_search(search).all())
-        return search
+        tags_checked = [checked.strip(' ') for checked in search if search[checked]=='on']
+        valid_tags = db.session.query(Tag.tag).all()
+        query = search.get('query','').upper()
+        found = [tag[0] for tag in valid_tags if tag[0].upper() in query and tag[0] not in tags_checked]
+        found = tags_checked+found
+
+        q = (
+            db.session.query(Question_Tag.question_id)
+            .join(Tag)
+            .filter(Tag.tag.in_(found))
+            .group_by(Question_Tag.question_id)
+            .having(func.count('*') >= len(found))
+        )
+        print(q.all())
+        return q.all()

@@ -1,5 +1,6 @@
 from sqlalchemy.sql import func
 from app import db
+from sqlalchemy import text
 
 class Tag(db.Model):
     __tablename__ = 'tags'

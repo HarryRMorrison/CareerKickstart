@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, request
-from app import app
+from app import app, db
 from app.controller import PostController, SearchController
 
 @app.route('/')

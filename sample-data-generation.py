@@ -148,7 +148,7 @@ for i in range(len(titles)):
     questions.append(comb)
     for num in [random.randint(1, 45) for _ in range(random.randint(1, 6))]:
         questionTags.append({'question_id':i,'tag_id':num})
-    for j in [random.randint(1, A_NUM) for _ in range(com)]:
+    for j in [random.randint(1, A_NUM-1) for _ in range(com)]:
         comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(1, USERS)}
         answers.append(comb)
 
