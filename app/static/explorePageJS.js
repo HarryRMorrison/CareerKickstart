@@ -2,7 +2,14 @@ var pages = 1;
 var isLoading = false;
 
 function getQuestions(){
-    $.get("/explore" + pages, function(responseText) {
+    search = window.location.href.split("?");
+    if (search.length > 1) {
+        search = search[1];
+    }
+    else (
+        search = ''
+    )
+    $.get("/explore/?page=" + pages + "&" + search, function(responseText) {
         insertMessages(responseText);
     });
     return 
@@ -18,6 +25,9 @@ function getDropdownFilters(){
 function insertMessages(newQuestions) {
     let $column = $('#messageBoard').children();
     for (let i = 0 ; i < 28 ; i++){
+        if (newQuestions[i]===undefined) {
+            return
+        }
         let post = newQuestions[i];
         let $newCard = $('<div class="card">');
         let $titleCard = $('<div class="card-title">').html('<h6>'+post.title+'</h6>');

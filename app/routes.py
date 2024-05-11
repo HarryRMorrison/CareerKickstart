@@ -9,15 +9,23 @@ def index():
 
 @app.route('/explore', methods=['GET'])
 def load_explorepage():
-    arguments = ['query','company','role','topic','discipline','industry']
-    if any(params in arguments for params in request.args):
-        return SearchController.search_func(request.args)
+    arguments = request.args
+    print(len(arguments))
+    if len(arguments)>0:
+        if len(arguments)==1 and arguments.get('query','') == '':
+            return PostController.get_top_questions()
+        else:
+            return PostController.get_searched_questions(arguments)
     else:
         return PostController.get_top_questions()
 
-@app.route('/explore<int:page>')
-def get_next_questions(page):
-    return PostController.get_next_question_set(page)
+@app.route('/explore/', methods=['GET'])
+def get_next_questions():
+    arguments = request.args
+    if len(arguments)>1:
+        return PostController.get_next_searched_questions(arguments,int(arguments.get('page','')))
+    else:
+        return PostController.get_next_question_set(int(arguments.get('page','')))
 
 @app.route('/filter-retrieve')
 def get_filters():
