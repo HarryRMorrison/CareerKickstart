@@ -2,6 +2,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from sqlalchemy.sql import func
 from app import db
+from werkzeug.security import generatePasswordHash, checkPasswordHash #Emily-add
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -17,12 +18,18 @@ class Tag(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(30))
-    email = db.Column(db.String(100))
-    password = db.Column(db.String(50))
+    username = db.Column(db.String(30), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password_Hash = db.Column(db.String(50), nullable=False)
 
     user_questions = db.relationship('Question', back_populates='user', lazy=True)
     user_answers = db.relationship('Answer', back_populates='user', lazy=True)
+
+    def setPword(self, password):
+        self.password_Hash = generatePasswordHash(password)
+
+    def checkPword(self, password):
+        return checkPasswordHash(self.password_Hash, password)
 
     def __repr__(self):
         return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
