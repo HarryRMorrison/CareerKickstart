@@ -56,8 +56,7 @@ class Question(db.Model):
 
     def to_dict(self):
         tagz = [itag.tag.tag for itag in self.tags]
-        return {'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username}
-    
+        return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username}
     
 class Question_Tag(db.Model):
     __tablename__ = 'question_tags'

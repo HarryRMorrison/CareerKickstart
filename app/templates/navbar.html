@@ -5,12 +5,12 @@
                 <img src="{{ url_for('static', filename='logo v1.png') }}" alt="CareerKickstart" height="60px">
             </a>
             
-            <form role="search">
+            <form role="search" action="http://127.0.0.1:5000/explore" method="get">
                 <!-- Search bar -->
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button type="submit" id="submitButton" class="btn"><i class="fa fa-search"></i></button>
                     <div class="d-flex align-items-center w-100 form-search">
-                        <input type="search" class="form-control" id="searchIn" placeholder="Search..." name="searchBar">
+                        <input type="search" class="form-control" id="searchIn" placeholder="Search..." name="query">
                     </div>
                 </div>
             </form>

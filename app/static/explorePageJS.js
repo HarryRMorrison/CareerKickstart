@@ -9,14 +9,14 @@ function getQuestions(){
     else (
         search = ''
     )
-    $.get("/explore/?page=" + pages + "&" + search, function(responseText) {
+    $.get("/api/explore/?page=" + pages + "&" + search, function(responseText) {
         insertMessages(responseText);
     });
     return 
 }
 
 function getDropdownFilters(){
-    $.get("/filter-retrieve", function(responseText) {
+    $.get("/api/filter-retrieve", function(responseText) {
         insertDropdownFilters(responseText);
     });
     return 
@@ -29,14 +29,14 @@ function insertMessages(newQuestions) {
             return
         }
         let post = newQuestions[i];
-        let $newCard = $('<div class="card">');
+        let $newCard = $('<div id="'+post.question_id+'" class="card">');
         let $titleCard = $('<div class="card-title">').html('<h6>'+post.title+'</h6>');
         let $subCard = $('<div class="card-subtitle d-flex">');
         post.tags.forEach(tag => {
             $subCard.append($('<p>').text(tag));
         });
         let $textCard = $('<div class="card-body">').html('<p class="card-text">'+post.description+'</p>');
-        let $actionCard = $('<div class="card-action d-flex">').html('<button id="like" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button id="comment" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
+        let $actionCard = $('<div class="card-action d-flex">').html('<button class="like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
         $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
         $($column.eq(i%4)).append($newCard);
         isLoading = false;
@@ -55,6 +55,24 @@ function insertDropdownFilters(filters) {
         $('#' + x + 'Dropdown').after($newFilters);
     }
 }
+function like_adjust(questionid, adjust){
+    $.ajax({ 
+        url: '/api/likeadjust/?qid='+questionid+'&num='+adjust, 
+        type: 'PUT', 
+        success: function (result) {
+            console.log(adjust)
+            if (adjust===1){
+                $('#'+questionid).find('.like').html('<i class="fa fa-thumbs-up"></i> '+result.likes)
+            }
+            else {
+                console.log(adjust)
+                $('#'+questionid).find('.like').html('<i class="fa fa-thumbs-o-up"></i> '+result.likes)
+            }
+        } 
+    });
+    return
+}
+
 
 $(window).on("load", function() { 
     getDropdownFilters();
@@ -73,4 +91,15 @@ $(document).ready(function() {
             pages += 1;
         }
     });
+    $('.like').click(function(){
+        questionid = $(this).closest('.card').attr('id');
+        if ($(this).attr('aria-pressed') === "false"){
+            like_adjust(questionid, 1);
+            $(this).attr('aria-pressed',"true");
+        }
+        else {
+            like_adjust(questionid, -1);
+            $(this).attr('aria-pressed',"false");
+        }
+    })
 });

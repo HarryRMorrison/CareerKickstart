@@ -2,7 +2,7 @@ from app import app, db
 from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
-from flask import render_template
+from flask import render_template, jsonify
 
 class PostController():
 
@@ -29,7 +29,7 @@ class PostController():
             .all()
         )
         next_posts = [question.to_dict() for question in next_set]
-        return next_posts
+        return jsonify(next_posts)
     
     def get_next_searched_questions(arguments, page_num):
         filters = {}
@@ -39,7 +39,7 @@ class PostController():
         q_ids = SearchController.search_func(filters)
         next_set = db.session.query(Question).filter(Question.question_id.in_(q_ids)).order_by((Question.likes + Question.comments).desc()).offset((page_num*28)-1).limit(28).all()
         next_posts = [question.to_dict() for question in next_set]
-        return next_posts
+        return jsonify(next_posts)
     
 class SearchController():
 
@@ -55,7 +55,7 @@ class SearchController():
         tags['discipline'] = [itag[0] for itag in discipline]
         tags['industry'] = [itag[0] for itag in industry]
         tags['topic'] = [itag[0] for itag in topic]
-        return tags
+        return jsonify(tags)
 
     def search_func(search):
         tags_checked = [checked.strip(' ') for checked in search if search[checked]=='on']
