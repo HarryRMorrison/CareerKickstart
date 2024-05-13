@@ -37,6 +37,8 @@ function insertMessages(newQuestions) {
         });
         let $textCard = $('<div class="card-body">').html('<p class="card-text">'+post.description+'</p>');
         let $actionCard = $('<div class="card-action d-flex">').html('<button class="like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
+        let $userinfo = $('<div class="user-info flex-end align-items-center">').html('<div class="user-info flex-end align-items-center"><img class="profil-pic" src="/static/'+post.profile_pic+'" style="height: 30px; width: 30px; border-radius: 30px;"><b> '+post.user+'</b><i>'+post.date+'</i></div>')
+        $actionCard.append($userinfo)
         $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
         $($column.eq(i%4)).append($newCard);
         isLoading = false;

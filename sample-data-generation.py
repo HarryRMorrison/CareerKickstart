@@ -20,7 +20,8 @@ for _ in range(USERS):
     username = fake.user_name()
     email = fake.email()
     password = fake.password(length=12, special_chars=True, digits=True, upper_case=True, lower_case=True)
-    users.append({'username':username, 'email':email, 'password':password})
+    profilpic = random.choice(['male1.png','male2.png','male3.png','female1.png','female2.png','female3.png'])
+    users.append({'username':username, 'email':email, 'password':password, 'profile_pic': profilpic})
 
 titles = [
     "What are common interview questions for a software engineering position?",
@@ -143,11 +144,16 @@ descriptions = [lorem.paragraph() for _ in range(Q_NUM)]
 answerz = [lorem.paragraph() for _ in range(A_NUM)]
 
 for i in range(len(titles)):
+    done = []
     com = random.randint(0, 6)
     comb = {"title":titles[i], "description":descriptions[i], "likes":random.randint(0, 49), "comments":com, 'user_id':random.randint(1, USERS)}
     questions.append(comb)
     for num in [random.randint(1, 45) for _ in range(random.randint(1, 6))]:
-        questionTags.append({'question_id':i,'tag_id':num})
+        if num in done:
+            continue
+        else:
+            done.append(num)
+            questionTags.append({'question_id':i,'tag_id':num})
     for j in [random.randint(1, A_NUM-1) for _ in range(com)]:
         comb = {"answer":answerz[j], "question_id":i, "likes":random.randint(0, 49), 'user_id':random.randint(1, USERS)}
         answers.append(comb)
@@ -160,7 +166,7 @@ try:
         db.session.add(t)
 
     for row in users:
-        u = User(username=row['username'], email=row['email'], password = row['password'])
+        u = User(username=row['username'], email=row['email'], password = row['password'], profile_pic=row['profile_pic'])
         db.session.add(u)
 
     for row in questions:

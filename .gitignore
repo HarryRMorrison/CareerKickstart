@@ -4,15 +4,3 @@ venv/
 .vscode/
 app/__pycache__/
 __pycache__/
-venv/bin/pip3
-venv/bin/pip
-venv/bin/mako-render
-venv/bin/flask
-venv/pyvenv.cfg
-venv/bin/activate
-venv/bin/activate.csh
-venv/bin/activate.fish
-venv/bin/alembic
-venv/bin/dotenv
-venv/bin/email_validator
-venv/bin/faker

@@ -13,5 +13,10 @@
     <div class="card-action d-flex">
         <button class="like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i> {{question.likes}}</button>
         <button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i> {{question.comments}}</button>
+        <div class="user-info flex-end align-items-center">
+            <img class="profil-pic" src="{{ url_for('static', filename=question.user.profile_pic) }}" style="height: 30px; width: 30px; border-radius: 30px;">
+            <b>{{ question.user.username }}</b>
+            <i>{{ question.date_created.date() }}</i>
+        </div>
     </div>
 </div>

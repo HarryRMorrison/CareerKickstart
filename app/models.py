@@ -5,8 +5,8 @@ from sqlalchemy import text
 class Tag(db.Model):
     __tablename__ = 'tags'
     tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    tag = db.Column(db.String(40), unique=True)
-    category = db.Column(db.String(40))
+    tag = db.Column(db.String(40), unique=True, index=True)
+    category = db.Column(db.String(40), index=True)
 
     question_tags = db.relationship('Question_Tag', back_populates='tag', lazy=True)
 
@@ -19,6 +19,7 @@ class User(db.Model):
     username = db.Column(db.String(30))
     email = db.Column(db.String(100))
     password = db.Column(db.String(50))
+    profile_pic = db.Column(db.String(12))
 
     user_questions = db.relationship('Question', back_populates='user', lazy=True)
     user_answers = db.relationship('Answer', back_populates='user', lazy=True)
@@ -56,7 +57,7 @@ class Question(db.Model):
 
     def to_dict(self):
         tagz = [itag.tag.tag for itag in self.tags]
-        return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username}
+        return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username,'profile_pic':self.user.profile_pic,'date':self.date_created.strftime('%Y-%m-%d')}
     
 class Question_Tag(db.Model):
     __tablename__ = 'question_tags'
