@@ -34,7 +34,7 @@
   background-color: rgb(116, 116, 250);
   color: white;
   border-radius: 20px;
-  font-size:x-small;
+  font-size:xx-small;
   font-weight: bold;
   max-width: 100%;
   white-space: nowrap;
@@ -53,6 +53,10 @@
   border-width: 0px;
   background-color: lightgray;
   margin-right: 5px;
+}
+
+.card-action > b,i {
+  font-size: xx-small;
 }
 
 .card-action > button:hover {

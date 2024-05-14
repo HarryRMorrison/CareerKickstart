@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, regexp, EqualTo
 
-def form_login():
-    return
+class QuestionForm(FlaskForm):
+    title = StringField('Question', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    

@@ -1,48 +1,53 @@
-#findRequests {
-    background-color: rgb(255, 253, 237);
-  }
-  
-  #searchIn {
-    background-color: #cbd5d6;
-    outline-style: none;
-    outline-width: 1px;
-    border-style: none;
-    border-radius: 30px;
-    text-indent: 10px;
-    margin-left: 6px;
-    width: 100%;
-  }
-  
-  #searchIn:hover {
-    background-color: #e2e2e2;
-  }
-  
-  #resetButton, #submitButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 40px;
-    background-color: rgb(116, 116, 250);
-    color: white;
-    margin-right: 8px;
-  }
-  
-  .dropdown-center .dropdown-toggle {
-    border-radius: 30px;
-    background-color: rgb(116, 116, 250);
-    border-style: none;
-    width: 100%;
-    height: 35px;
-    font-weight: bold;
-    margin-left: 6px;
-  }
-  
-  .dropdown-toggle:hover, #submitButton:hover, #resetButton:hover{
-    background-color: rgb(51, 55, 255);
-  }
-  
-  form {
-    width: 60%;  /* Adjust this value to make the form narrower or wider */
-  }
+nav {
+  background-color: rgb(255, 255, 255);
+}
+
+.navbar-toggler {
+  border: none;            /* Optional: remove border if not needed */
+  font-size: medium;
+  padding: 5px;
+}
+
+#searchIn {
+  background-color: #cbd5d6;
+  outline-style: none;
+  outline-width: 1px;
+  border-style: none;
+  border-radius: 30px;
+  text-indent: 10px;
+  width: 100%;
+}
+
+#searchIn:hover {
+  background-color: #e2e2e2;
+}
+
+#resetButton, #submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 40px;
+  background-color: rgb(116, 116, 250);
+  color: white;
+  margin-right: 4px;
+}
+
+.dropdown-center .dropdown-toggle {
+  border-radius: 30px;
+  background-color: rgb(116, 116, 250);
+  border-style: none;
+  width: 100%;
+  height: 35px;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.dropdown-toggle:hover, #submitButton:hover, #resetButton:hover{
+  background-color: rgb(51, 55, 255);
+}
+
+form {
+  width: 60%;  /* Adjust this value to make the form narrower or wider */
+}

@@ -1,0 +1,28 @@
+.dropdown-center .dropdown-toggle {
+    border-radius: 30px;
+    background-color: rgb(116, 116, 250);
+    border-style: none;
+    height: 35px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.dropdown-toggle:hover, #createQuestion:hover{
+    background-color: rgb(51, 55, 255);
+}
+
+#createQuestion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    background-color: rgb(116, 116, 250);
+    color: white;
+    margin-right: 8px;
+    border-style: none;
+    font-weight: bold;
+}
+
+.needs-validation {
+    width: 60%;
+}

@@ -1,33 +1,37 @@
-<div id="findRequests" class="container-fluid p-2 sticky-top bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='logo v1.png') }}" alt="CareerKickstart" height="60px">
-            </a>
-            
-            <form role="search" action="http://127.0.0.1:5000/explore" method="get">
-                <!-- Search bar -->
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <button type="submit" id="submitButton" class="btn"><i class="fa fa-search"></i></button>
-                    <div class="d-flex align-items-center w-100 form-search">
-                        <input type="search" class="form-control" id="searchIn" placeholder="Search..." name="query">
-                    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top bg-body-tertiary align-items-center">
+    <div class="container-fluid">
+        <a class="navbar-brand p-0 m-0" href="/">
+            <img src="{{ url_for('static', filename='logo v1.png') }}" alt="CareerKickstart" width="120px">
+        </a>
+        
+        <form role="search" action="http://127.0.0.1:5000/explore" method="get">
+            <!-- Search bar -->
+            <div class="d-flex justify-content-between align-items-center">
+                <button type="submit" id="submitButton" class="btn"><i class="fa fa-search"></i></button>
+                <div class="d-flex align-items-center w-100 form-search">
+                    <input type="search" class="form-control" id="searchIn" placeholder="Search..." name="query">
                 </div>
-            </form>
-            <!-- Links -->               
-            <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav">
+            </div>
+        </form>
+        <!-- Links -->               
+        <div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/explore">Explore</a></li>
-                        <li class="nav-item"><a class="nav-link">Create</a></li>
-                        <li class="nav-item"><a class="nav-link">Login/Sign up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/create">Create</a></li>
+                        <li class="nav-item"><a class="nav-link">Login</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>

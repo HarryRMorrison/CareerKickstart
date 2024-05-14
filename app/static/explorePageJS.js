@@ -37,7 +37,7 @@ function insertMessages(newQuestions) {
         });
         let $textCard = $('<div class="card-body">').html('<p class="card-text">'+post.description+'</p>');
         let $actionCard = $('<div class="card-action d-flex">').html('<button class="like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i>'+post.likes+'</button><button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i>'+post.comments+'</button>');
-        let $userinfo = $('<div class="user-info flex-end align-items-center">').html('<div class="user-info flex-end align-items-center"><img class="profil-pic" src="/static/'+post.profile_pic+'" style="height: 30px; width: 30px; border-radius: 30px;"><b> '+post.user+'</b><i>'+post.date+'</i></div>')
+        let $userinfo = $('<div class="user-info d-flex align-items-center justify-content-center">').html('<img class="profil-pic" src="/static/'+post.profile_pic+'" style="height: 30px; width: 30px; border-radius: 30px;"><b class="d-inline-block text-truncate" style="max-width: 100px;"> '+post.user+' </b><i class="ms-2"> '+post.date+' </i>')
         $actionCard.append($userinfo)
         $newCard.append($titleCard).append($subCard).append($textCard).append($actionCard);
         $($column.eq(i%4)).append($newCard);
@@ -55,6 +55,7 @@ function insertDropdownFilters(filters) {
             $newFilters.append('<li><a class="dropdown-item"><label><input type="checkbox" name="  ' + filterName + ' ">  ' + filterName + '</label></a></li>');
         }
         $('#' + x + 'Dropdown').after($newFilters);
+        console.log('#' + x + 'Dropdown')
     }
 }
 function like_adjust(questionid, adjust){
@@ -74,7 +75,6 @@ function like_adjust(questionid, adjust){
     });
     return
 }
-
 
 $(window).on("load", function() { 
     getDropdownFilters();

@@ -14,7 +14,7 @@ def get_next_questions():
 
 @app.route('/api/filter-retrieve', methods=['GET'])
 def get_filters():
-    return SearchController.get_tags()
+    return jsonify(SearchController.get_tags())
 
 @app.route('/api/likeadjust/', methods=['PUT'])
 def adjust_likes():
@@ -23,7 +23,6 @@ def adjust_likes():
 
     if not questionid or not num:
         return jsonify({"error": "Missing parameters"}), 400
-    print(Question.query.filter_by(question_id=questionid).first().likes)
     post = Question.query.filter_by(question_id=questionid).first()
     if post is None:
         return jsonify({"error": "Question not found"}), 404
@@ -33,5 +32,4 @@ def adjust_likes():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-    print(Question.query.filter_by(question_id=questionid).first().likes)
     return jsonify({"likes": post.likes})

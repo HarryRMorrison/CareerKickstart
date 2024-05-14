@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from app import app, db
-from app.controller import PostController
+from app.controller import PostController, SearchController
 
 @app.route('/')
 @app.route('/home')
@@ -17,3 +17,7 @@ def load_explorepage():
             return PostController.get_searched_questions(arguments)
     else:
         return PostController.get_top_questions()
+    
+@app.route('/create', methods=['GET', 'POST'])
+def load_createpage():
+    return PostController.create_post()
