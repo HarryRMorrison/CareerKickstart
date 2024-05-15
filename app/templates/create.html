@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="./static/createPage.js"></script>
+      <link rel="stylesheet" type="text/css" href="./static/createStyle.css">
+      <link rel="stylesheet" type="text/css" href="./static/navbarStyle.css">
+      <title>Career Kickstart - Create</title>
+  </head>
+  <body>
+    {% include "navbar.html" %}
+    <main class="container-fluid d-flex align-items-center justify-content-center" style="background-image:url('./static/businessquestion.png'); height: 400px;">
+      <div class="text-center">
+        <h1 class="display-2 text-white">Find a Solution to Your Query</h1>
+      </div>
+    </main>
+
+    <form class="container" action="/create" method="post" novalidate>
+    	{{ form.hidden_tag() }}
+    	<div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control", id="title") }}
+		{% for error in form.title.errors %}
+		<span style="color:red;">[{{ error}}]</span>
+		{% endfor %}
+    	</div>
+    	<div class="mb-3">
+        	{{ form.description.label(class="form-label mt-4") }}
+            {{ form.description(class="form-control", id="description", rows=3, required=True) }}
+			{% for error in form.description.errors %}
+			<span style="color:red;">[{{ error}}]</span>
+			{% endfor %}
+		</div>
+        <div class="dropdown-center d-flex row mt-4">
+            {% for name, tags in category.items() %}
+            <div class="col">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="chosen{{ name }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ name.capitalize() }}</button>
+              <ul class="dropdown-menu" aria-labelledby="chosen{{ name }}">
+         		   {% for tag in tags %}
+                	<li>
+                		<a class="dropdown-item">
+                			<label><input type="checkbox" name="{{ tag }}"> {{ tag }} </label>
+                  		</a>
+                	</li>
+                	{% endfor %}
+            	</ul>
+            </div>
+            {% endfor %}
+        </div>
+        <button id="createQuestion" class="btn btn-primary mt-4" type="submit">Post Question</button>
+    </form>
+  </body>
+</html>
