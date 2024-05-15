@@ -39,17 +39,19 @@
 		</div>
 		<p>{{ form.tags.label }}<br></p>
         <div class="dropdown-center d-flex row mt-4">
-            {% for name in ['company','role','discipline','industry','topic'] %}
-            <div class="col">
-              	<button class="btn btn-primary dropdown-toggle" type="button" id="chosen{{ name }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ name.capitalize() }}</button>
-              	<ul class="dropdown-menu" aria-labelledby="chosen{{ name }}">
+            {% for name, tags in categories.items() %}
+			<div class="col">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="chosen{{ name }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ name.capitalize() }}</button>
+				<ul class="dropdown-menu" aria-labelledby="chosen{{ name }}">
 					{% for checkbox in form.tags %}
-                	<li>
-                		<a class="dropdown-item">
-                			{{ checkbox() }} {{ checkbox.label }}
-                  		</a>
-                	</li>
-                	{% endfor %}
+						{% if checkbox.label.text in tags %}
+						<li>
+							<a class="dropdown-item">
+								<label>{{ checkbox() }} {{ checkbox.label }}</label>
+							</a>
+						</li>
+						{% endif %}
+					{% endfor %}
             	</ul>
             </div>
             {% endfor %}

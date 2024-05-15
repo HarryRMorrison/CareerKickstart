@@ -166,7 +166,8 @@ try:
         db.session.add(t)
 
     for row in users:
-        u = User(username=row['username'], email=row['email'], password = row['password'], profile_pic=row['profile_pic'])
+        u = User(username=row['username'], email=row['email'], profile_pic=row['profile_pic'])
+        u.password_hash = row['password']
         db.session.add(u)
 
     for row in questions:

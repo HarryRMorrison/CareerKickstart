@@ -48,9 +48,9 @@ class PostController():
         form.set_choices([tag[0] for tag in tag_choices])
         if form.validate_on_submit():
             # Process the validated data
-            print('Validated Question Data:', form.data)
+            print('Validated Form Data:', form.data)
             return redirect('/home')  # Redirect as necessary
-        return render_template('create.html', form=form)
+        return render_template('create.html', form=form, categories=SearchController.get_tags())
     
 class SearchController():
 

@@ -51,3 +51,8 @@ nav {
 form {
   width: 60%;  /* Adjust this value to make the form narrower or wider */
 }
+
+.dropdown-menu {
+  max-height: 350px;
+  overflow-y: scroll;
+}

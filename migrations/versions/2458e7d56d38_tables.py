@@ -1,8 +1,8 @@
-"""add tables
+"""tables
 
-Revision ID: e38033ffec10
+Revision ID: 2458e7d56d38
 Revises: 
-Create Date: 2024-05-13 12:45:14.951976
+Create Date: 2024-05-15 19:54:37.805863
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e38033ffec10'
+revision = '2458e7d56d38'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,16 +22,22 @@ def upgrade():
     sa.Column('tag_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('tag', sa.String(length=40), nullable=True),
     sa.Column('category', sa.String(length=40), nullable=True),
-    sa.PrimaryKeyConstraint('tag_id'),
-    sa.UniqueConstraint('tag')
+    sa.PrimaryKeyConstraint('tag_id')
     )
+    with op.batch_alter_table('tags', schema=None) as batch_op:
+        batch_op.create_index(batch_op.f('ix_tags_category'), ['category'], unique=False)
+        batch_op.create_index(batch_op.f('ix_tags_tag'), ['tag'], unique=True)
+
     op.create_table('users',
     sa.Column('user_id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('username', sa.String(length=30), nullable=True),
-    sa.Column('email', sa.String(length=100), nullable=True),
-    sa.Column('password', sa.String(length=50), nullable=True),
+    sa.Column('username', sa.String(length=30), nullable=False),
+    sa.Column('email', sa.String(length=100), nullable=False),
+    sa.Column('password_hash', sa.String(length=128), nullable=False),
     sa.Column('profile_pic', sa.String(length=12), nullable=True),
-    sa.PrimaryKeyConstraint('user_id')
+    sa.Column('about_me', sa.String(length=200), nullable=True),
+    sa.PrimaryKeyConstraint('user_id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('username')
     )
     op.create_table('questions',
     sa.Column('question_id', sa.Integer(), autoincrement=True, nullable=False),
@@ -78,5 +84,9 @@ def downgrade():
 
     op.drop_table('questions')
     op.drop_table('users')
+    with op.batch_alter_table('tags', schema=None) as batch_op:
+        batch_op.drop_index(batch_op.f('ix_tags_tag'))
+        batch_op.drop_index(batch_op.f('ix_tags_category'))
+
     op.drop_table('tags')
     # ### end Alembic commands ###

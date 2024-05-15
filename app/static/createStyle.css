@@ -11,6 +11,11 @@
     background-color: rgb(51, 55, 255);
 }
 
+.dropdown-menu {
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
 #createQuestion {
     display: flex;
     justify-content: center;

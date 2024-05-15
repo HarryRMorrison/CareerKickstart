@@ -27,3 +27,4 @@ class QuestionForm(FlaskForm):
 
     def set_choices(self, choices):
         self.tags.choices = [(choice, choice) for choice in choices]
+

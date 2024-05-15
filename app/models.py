@@ -39,7 +39,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
+        return '[<User {}> <User_id {}> <Email {}> <Password {}>]'.format(self.username, self.user_id, self.email, self.password_hash)
     
 class Question(db.Model):
     __tablename__ = 'questions'
