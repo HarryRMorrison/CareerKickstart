@@ -1,5 +1,6 @@
 from sqlalchemy.sql import func
 from app import db
+from hashlib import md5
 from sqlalchemy import text
 
 class Tag(db.Model):
@@ -24,8 +25,14 @@ class User(db.Model):
     user_questions = db.relationship('Question', back_populates='user', lazy=True)
     user_answers = db.relationship('Answer', back_populates='user', lazy=True)
 
+    about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
+
     def __repr__(self):
         return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
+    
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
     
 class Question(db.Model):
     __tablename__ = 'questions'
