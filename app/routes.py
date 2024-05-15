@@ -1,22 +1,30 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, redirect, url_for, request, flash
 from app import app, db
+from app.controller import PostController, SearchController
 from flask_login import login_required, current_user
 import sqlalchemy as sa
 from app.models import User
 from app.forms import EditProfileForm
 
 @app.route('/')
-@app.route('/index')
+@app.route('/home')
 def index():
-    return "Hello, World!"
+    return render_template('home.html')
 
-@app.route('/getcard', methods = ['GET'])
-def send_card_template():
-    question_demo = {}
-    return render_template('card.html', question=question_demo)
-
-@app.route('/explore')
+@app.route('/explore', methods=['GET'])
 def load_explorepage():
+    arguments = request.args
+    if len(arguments)>0:
+        if len(arguments)==1 and arguments.get('query','') == '':
+            return PostController.get_top_questions()
+        else:
+            return PostController.get_searched_questions(arguments)
+    else:
+        return PostController.get_top_questions()
+    
+@app.route('/create', methods=['GET', 'POST'])
+def load_createpage():
+    return PostController.create_post()
     posts = []
     return render_template("explorePage.html", posts=posts)
 
@@ -43,5 +51,4 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile',
-                           form=form)
+    return render_template('edit_profile.html', title='Edit Profile',form=form)
