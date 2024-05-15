@@ -4,7 +4,7 @@ from app.controller import PostController, SearchController
 from flask_login import login_required, current_user
 import sqlalchemy as sa
 from app.models import User
-from app.forms import EditProfileForm
+from app.forms import EditProfileForm, QuestionForm
 
 @app.route('/')
 @app.route('/home')
