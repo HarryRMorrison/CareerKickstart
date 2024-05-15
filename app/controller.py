@@ -3,7 +3,7 @@ from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask import render_template, jsonify, redirect, url_for
-from app.forms import QuestionForm
+from app.forms import QuestionForm, EditProfileForm
 
 class PostController():
 
@@ -82,3 +82,21 @@ class SearchController():
             .all()
         )
         return [q_id[0] for q_id in result]
+    
+class UserController():
+
+    def register():
+        return
+    
+    def edit_profile():
+        form = EditProfileForm()
+        if form.validate_on_submit():
+            current_user.username = form.username.data
+            current_user.about_me = form.about_me.data
+            db.session.commit()
+            flash('Your changes have been saved.')
+            return redirect(url_for('edit_profile'))
+        elif request.method == 'GET':
+            form.username.data = current_user.username
+            form.about_me.data = current_user.about_me
+        return render_template('edit_profile.html', title='Edit Profile',form=form)

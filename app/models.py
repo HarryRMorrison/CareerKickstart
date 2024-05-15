@@ -1,7 +1,11 @@
 from sqlalchemy.sql import func
-from app import db
-from hashlib import md5
+from app import db, login
 from sqlalchemy import text
+from flask_login import UserMixin
+
+@login.user_loader
+def load_student(id):
+  return User.query.get(int(id))
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -14,25 +18,20 @@ class Tag(db.Model):
     def __repr__(self):
         return '[<Tag_id {}> <Tag {}>]'.format(self.tag_id, self.tag)
     
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(30))
     email = db.Column(db.String(100))
     password = db.Column(db.String(50))
     profile_pic = db.Column(db.String(12))
+    about_me = db.Column(db.String(200), nullable=True)
 
     user_questions = db.relationship('Question', back_populates='user', lazy=True)
     user_answers = db.relationship('Answer', back_populates='user', lazy=True)
 
-    about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
-
     def __repr__(self):
         return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
-    
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
     
 class Question(db.Model):
     __tablename__ = 'questions'

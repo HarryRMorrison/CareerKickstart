@@ -25,8 +25,10 @@ def load_explorepage():
 @app.route('/create', methods=['GET', 'POST'])
 def load_createpage():
     return PostController.create_post()
-    posts = []
-    return render_template("explorePage.html", posts=posts)
+
+@app.route('/login', methods=['GET','POST'])
+def load_login():
+    return render_template('login.html')    
 
 @app.route('/user/<username>')
 @login_required
