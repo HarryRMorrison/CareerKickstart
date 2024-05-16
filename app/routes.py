@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, flash, jsonify
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from app import app, db
 from app.controller import PostController, SearchController
 from flask_login import login_required, current_user
@@ -24,10 +24,12 @@ def load_explorepage():
         return PostController.get_top_questions()
 
 @app.route('/create', methods=['GET', 'POST'])
+@login_required
 def load_createpage():
-    return PostController.create_post()
-    posts = []
-    return render_template("explorePage.html", posts=posts)
+    if request.method == 'POST':
+        return PostController.create_post()
+    else:
+        return render_template("create.html")
 
 @app.route('/signup', methods=['POST'])
 def signup():
