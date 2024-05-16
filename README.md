@@ -58,8 +58,8 @@ https://github.com/HarryRMorrison/CareerKickstart
 
 ## Authors
 
-* **Harry Morrison** 23403634 - [GitHub Profile](https://github.com/HarryRMorrison)
-* **Emily** 23374456
-* **Jessica** 23367247
-* **Meg** 
+* **Harry Morrison** 23403634 - [GitHub Profile - HarryRMorrison](https://github.com/HarryRMorrison) & [harryM24](https://github.com/harryM24)
+* **Emily** 23374456 - [GitHub Profile - EmilyRuii](https://github.com/EmilyRuii)
+* **Jessica** 23367247 - [GitHub Profile - JessicaShindunata](https://github.com/JessicaShindunata)
+* **Meg** 23390643 - [GitHub Profile - megGoody](https://github.com/megGoody)
 
