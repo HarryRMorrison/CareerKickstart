@@ -3,6 +3,7 @@ from app import app, db
 from app.models import User
 from app.forms import LoginForm, SignupForm 
 from app.controller import PostController
+from flask_login import current_user, login_user, logout_user, login_required
 
 @app.route('/')
 @app.route('/home')
@@ -22,36 +23,22 @@ def load_explorepage():
 
 @app.route('/getcard', methods = ['GET'])
 def send_card_template():
-    question_demo = {}
-    return render_template('card.html', question=question_demo)
+    return render_template('card.html', question={})
 
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
 def load_createpage():
-    return PostController.create_post()
-
-@app.route('/login', methods=['GET','POST'])
-def load_login():
-    return render_template('login.html')  
+    return PostController.create_post()  
 
 @app.route('/signup', methods=['POST'])
 def signup():
     form = SignupForm(request.form)
     if form.validate_on_submit():
-        username = form.username.data
-        email = form.email.data
-        password = form.password.data
+        print('New User:', form.data)
+        return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
-        if User.query.filter((User.username == username) | (User.email == email)).first():
-            return jsonify({"error": "This username or email already exists."}), 400
-        new_user = User(username=username, email=email)
-        new_user.set_password(password)
-        db.session.add(new_user)
-        db.session.commit()
-        return jsonify({"message": "You have been registered."}), 201
-    return jsonify({"error": "Invalid form data."}), 400
-
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm(request.form)
     if form.validate_on_submit():
@@ -60,7 +47,7 @@ def login():
         user = User.query.filter((User.username == username_email) | (User.email == username_email)).first()
         if user and user.check_password(password):
             return jsonify({"message": "Logged in."}), 200
-    return jsonify({"error": "Entered credentials are invalid."}), 401
+    return 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required

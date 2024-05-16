@@ -1,6 +1,7 @@
 from wtforms import widgets, StringField, SubmitField, TextAreaField, PasswordField, BooleanField, SelectField, SelectMultipleField, ValidationError
-from wtforms.validators import DataRequired, Length, regexp, EqualTo
+from wtforms.validators import DataRequired, Length, regexp, EqualTo, Email
 from flask_wtf import FlaskForm
+from app.models import User
 
 def validate_min_tags(form, field):
     if len(field.data) < 1:
@@ -9,6 +10,16 @@ def validate_min_tags(form, field):
 def validate_max_tags(form, field):
     if len(field.data) > 6:
         raise ValidationError('No more than 6 tags can be selected.')
+    
+def validate_user_exist(form, field):
+    user = User.query.filter_by((User.username == field.username)).first()
+    if user:
+        raise ValidationError('The username already exists')
+    
+def validate_email_exist(form, field):
+    user = User.query.filter_by((User.email == field.email)).first()
+    if user:
+        raise ValidationError('The username already exists')
     
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
@@ -35,8 +46,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 class SignupForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=30)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired(), validate_user_exist,Length(min=4, max=30)])
+    email = StringField('Email', validators=[DataRequired(), Email(), validate_email_exist])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')

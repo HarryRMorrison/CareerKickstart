@@ -3,7 +3,7 @@ from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask import render_template, jsonify, redirect, url_for
-from app.forms import QuestionForm, EditProfileForm
+from app.forms import QuestionForm, EditProfileForm, LoginForm, SignupForm
 
 class PostController():
 

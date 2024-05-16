@@ -1,5 +1,3 @@
-import sqlalchemy as sa
-import sqlalchemy.orm as so
 from sqlalchemy.sql import func
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
