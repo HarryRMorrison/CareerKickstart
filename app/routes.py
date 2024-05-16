@@ -13,10 +13,13 @@ def send_card_template():
     question_demo = {}
     return render_template('card.html', question=question_demo)
 
-@app.route('/explore')
-def load_explorepage():
-    posts = []
-    return render_template("explorePage.html", posts=posts)
+@app.route('/create', methods=['GET', 'POST'])
+@login_required
+def load_createpage():
+    if request.method == 'POST':
+        return PostController.create_post()
+    else:
+        return render_template("create.html")
 
 @app.route('/signup', methods=['POST'])
 def signup():
