@@ -12,12 +12,12 @@ def validate_max_tags(form, field):
         raise ValidationError('No more than 6 tags can be selected.')
     
 def validate_user_exist(form, field):
-    user = User.query.filter_by((User.username == field.username)).first()
+    user = User.query.filter_by(username = field.data).first()
     if user:
         raise ValidationError('The username already exists')
     
 def validate_email_exist(form, field):
-    user = User.query.filter_by((User.email == field.email)).first()
+    user = User.query.filter_by(email = field.data).first()
     if user:
         raise ValidationError('The username already exists')
     
@@ -46,7 +46,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 class SignupForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), validate_user_exist,Length(min=4, max=30)])
+    username = StringField('Username', validators=[DataRequired(), validate_user_exist, Length(min=4, max=30)])
     email = StringField('Email', validators=[DataRequired(), Email(), validate_email_exist])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])

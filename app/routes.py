@@ -1,7 +1,7 @@
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify, redirect, url_for, flash
 from app import app, db
 from app.models import User
-from app.forms import LoginForm, SignupForm 
+from app.forms import LoginForm, SignupForm
 from app.controller import PostController
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -28,26 +28,27 @@ def send_card_template():
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
 def load_createpage():
-    return PostController.create_post()  
+    if not current_user.is_authenticated:
+        flash("Login or Sign up to Post a Question")
+        return redirect(url_for('login'))
+    return PostController.create_post()
 
 @app.route('/signup', methods=['POST'])
 def signup():
     form = SignupForm(request.form)
     if form.validate_on_submit():
         print('New User:', form.data)
-        return redirect(url_for('home'))
+        return redirect('/home')
+    print('Bad User:', form.data)
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    form = LoginForm(request.form)
-    if form.validate_on_submit():
-        username_email = form.username_email.data
-        password = form.password.data
-        user = User.query.filter((User.username == username_email) | (User.email == username_email)).first()
-        if user and user.check_password(password):
-            return jsonify({"message": "Logged in."}), 200
-    return 
+    login = LoginForm()
+    signup = SignupForm()
+    if login.validate_on_submit():
+        return redirect('/home')
+    return render_template('login.html', form1=login, form2=signup)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
