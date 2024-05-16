@@ -1,14 +1,14 @@
+import sqlalchemy as sa
+import sqlalchemy.orm as so
 from sqlalchemy.sql import func
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from hashlib import md5
-from sqlalchemy import text
 
 class Tag(db.Model):
     __tablename__ = 'tags'
     tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    tag = db.Column(db.String(40), unique=True, index=True)
-    category = db.Column(db.String(40), index=True)
+    tag = db.Column(db.String(40), unique=True)
+    category = db.Column(db.String(40))
 
     question_tags = db.relationship('Question_Tag', back_populates='tag', lazy=True)
 
@@ -21,10 +21,8 @@ class User(db.Model):
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    profile_pic = db.Column(db.String(12))
-    about_me = db.Column(db.String(140))
 
-    user_questions = db.relationship('Question', back_populates='user', lazy=True)
+    user_questions = db.relationship('Question', back_populates='user', lazy=True) 
     user_answers = db.relationship('Answer', back_populates='user', lazy=True)
 
     def set_password(self, password):
@@ -36,15 +34,11 @@ class User(db.Model):
     def __repr__(self):
         return '[<User {}> <User_id {}> <Email {}>]'.format(self.username, self.user_id, self.email)
     
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
-    
 class Question(db.Model):
     __tablename__ = 'questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    title = db.Column(db.String(100), nullable=False, index=True)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
     likes = db.Column(db.Integer)
@@ -65,12 +59,6 @@ class Question(db.Model):
         Comments:{self.comments}
         ]'''
     
-    def associated_tags(self):
-        return [itag.tag.tag for itag in self.tags]
-
-    def to_dict(self):
-        tagz = [itag.tag.tag for itag in self.tags]
-        return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username,'profile_pic':self.user.profile_pic,'date':self.date_created.strftime('%Y-%m-%d')}
     
 class Question_Tag(db.Model):
     __tablename__ = 'question_tags'
