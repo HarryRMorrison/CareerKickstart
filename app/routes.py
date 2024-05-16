@@ -2,7 +2,7 @@ from flask import render_template, request, jsonify, redirect, url_for, flash
 from app import app, db
 from app.models import User
 from app.forms import LoginForm, SignupForm
-from app.controller import PostController
+from app.controller import PostController, UserController
 from flask_login import current_user, login_user, logout_user, login_required
 
 @app.route('/')
@@ -36,10 +36,12 @@ def load_createpage():
 @app.route('/signup', methods=['POST'])
 def signup():
     form = SignupForm(request.form)
+    print(form.data)
     if form.validate_on_submit():
         print('New User:', form.data)
+        UserController.register(form.data)
+        flash("Login Success!")
         return redirect('/home')
-    print('Bad User:', form.data)
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -47,20 +49,13 @@ def login():
     login = LoginForm()
     signup = SignupForm()
     if login.validate_on_submit():
+        print('Logging in:', login.data)
+        UserController.login(login.data)
+        flash("Login Success!")
         return redirect('/home')
     return render_template('login.html', form1=login, form2=signup)
 
-@app.route('/edit_profile', methods=['GET', 'POST'])
-@login_required
-def edit_profile():
-    form = EditProfileForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
-        db.session.commit()
-        flash('Your changes have been saved.')
-        return redirect(url_for('edit_profile'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/home')

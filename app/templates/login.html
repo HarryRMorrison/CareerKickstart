@@ -19,7 +19,6 @@
         {% include "navbar.html" %}
         {% with message = get_flashed_messages() %}
         {% if message %}
-        {{ message }}
         <div class="modal" tabindex="-1">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -38,56 +37,64 @@
         </div>
         {% endif %}
         {% endwith %}
-        <form action="/login" id="loginform" method="post"> <!--placeholder location-->
-            {{form1.hidden_tag()}}
-            <p>
-                {{ form1.username_email.label }}<br>
-                {{ form1.username_email }}
-                {% for error in form1.username_email.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form1.password.label }}<br>
-                {{ form1.password }}
-                {% for error in form1.password.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-                {{ form1.submit }}
-        </form> 
-
-        <form action="/signup" id="signupform" method="post"> <!--placeholder location-->
-            {{form2.hidden_tag()}}
-            <p>
-                {{ form2.email.label }}<br>
-                {{ form2.email }}
-                {% for error in form2.email.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form2.username.label }}<br>
-                {{ form2.username }}
-                {% for error in form2.username.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form2.password.label }}<br>
-                {{ form2.password }}
-                {% for error in form2.password.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form2.confirm_password.label }}<br>
-                {{ form2.confirm_password }}
-                {% for error in form2.confirm_password.errors %}
-                <span style="color:red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-                {{ form2.submit }}
-        </form> 
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-end align-items-center">
+                <form action="/login" id="loginform" method="post"> <!--placeholder location-->
+                    {{form1.hidden_tag()}}
+                    <p>
+                        {{ form1.username_email.label }}<br>
+                        {{ form1.username_email }}
+                        {% for error in form1.username_email.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form1.password.label }}<br>
+                        {{ form1.password }}
+                        {% for error in form1.password.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                        {{ form1.submit }}
+                </form>
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <div class="vl"></div>
+            </div>
+            <div class="col d-flex justify-content-start align-items-center">
+                <form action="/signup" id="signupform" method="post"> <!--placeholder location-->
+                    {{form2.hidden_tag()}}
+                    <p>
+                        {{ form2.email.label }}<br>
+                        {{ form2.email }}
+                        {% for error in form2.email.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form2.username.label }}<br>
+                        {{ form2.username }}
+                        {% for error in form2.username.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form2.password.label }}<br>
+                        {{ form2.password }}
+                        {% for error in form2.password.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form2.confirm_password.label }}<br>
+                        {{ form2.confirm_password }}
+                        {% for error in form2.confirm_password.errors %}
+                        <span style="color:red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                        {{ form2.submit }}
+                </form>
+            </div>
+        </div>
     </body>
 </html>

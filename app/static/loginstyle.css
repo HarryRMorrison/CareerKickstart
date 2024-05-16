@@ -1,24 +1,33 @@
-button {
-    width: auto;
-    height: 45px;
-    align-self: center;
-    align-items: center;
-    border-radius: 40px;
-    background-color: rgb(81, 160, 252);
+input[type="submit"] {
+    background-color: rgb(116, 116, 250);
     color: white;
     padding: 0 20px;
-    margin-right: 6px;
+    border-style: none;
 }
 
-.submit:hover {
-    background-color: rgb(49, 82, 121);
+input[type="submit"]:hover {
+    background-color: rgb(51, 55, 255);
 }
 
-label {
-    color: #333;
+input {
+    width:300px;
+    border-radius: 30px;
+    border-style: none;
+    background-color: #cbd5d6;
+    text-indent: 5px;
+    height: 40px;
 }
+
+input:hover {
+    background-color: #e2e2e2;
+  }
 
 #loginform, #signupform {
-    float:left;
-    width: 50%;  
-  }
+    width:min-content;
+}
+
+.vl {
+    border-left: 3px solid rgb(176, 176, 176);
+    height: 500px;
+    border-radius: 3px;
+}

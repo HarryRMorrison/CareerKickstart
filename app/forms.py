@@ -21,6 +21,14 @@ def validate_email_exist(form, field):
     if user:
         raise ValidationError('The username already exists')
     
+def validate_email_or_user(form, field):
+    try:
+        user = User.query.filter_by(email = field.data).first()
+    except:
+        user = User.query.filter_by(username = field.data).first()
+    if not user:
+        raise ValidationError("User doesn't exist")
+    
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
@@ -40,10 +48,10 @@ class QuestionForm(FlaskForm):
         self.tags.choices = [(choice, choice) for choice in choices]
     
 class LoginForm(FlaskForm):
-    username_email = StringField('Username or Email', validators=[DataRequired()])
+    username_email = StringField('Username or Email', validators=[DataRequired(), validate_email_or_user])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Log In')
 
 class SignupForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), validate_user_exist, Length(min=4, max=30)])

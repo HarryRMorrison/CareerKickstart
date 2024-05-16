@@ -11,29 +11,36 @@
         <link rel="stylesheet" type="text/css" href="./static/homePageStyle.css">
         <link rel="stylesheet" type="text/css" href="./static/navbarStyle.css">
         <title>Career Kickstart</title>
+        <script>window.onload = () => {$('.modal').modal('show');}</script>
     </head>
     <body>
         {% include "navbar.html" %}
-        <div class="container-fluid d-flex align-items-center justify-content-center" style="background-image:url('./static/career-development.png'); height: 500px;">
+        {% with message = get_flashed_messages() %}
+        {% if message %}
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Welcome</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>{{ message[0] }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="container-fluid d-flex align-items-center justify-content-center" style="background-image:url('./static/career-development.png'); height: 700px;">
             <div class="text-center">
                 <h1 class="display-2 text-white">Career Kickstart</h1>
                 <p class="text-white">Search for career help!</p>
                 <a href="/explore" class="btn btn-primary">Explore Now</a>
             </div>
-        </div>
-        <div class="container m-4">
-            <p class="lead text-justify">
-                Welcome to CareerKickstart, the dedicated platform for interns and graduates seeking guidance in the early stages of their careers. At CareerKickstart, we recognize the challenges that come with transitioning from academic life to professional environments, and we are committed to providing the support necessary for you to navigate this journey effectively.
-            </p>
-            <br></br>
-            <p class="lead text-justify">    
-                Our website offers a range of resources specifically designed for those entering the workforce. Whether you're searching for your first internship, a graduate position, or simply exploring different career options, CareerKickstart is here to assist you. We provide practical advice, professional insights, and a wealth of information to help enhance your job search skills. 
-            </p>
-            <br></br>
-            <p class="lead text-justify">    
-                Explore our database of advice, receive career coaching tailored to your needs, and connect with a network of professionals and like-minded peers. CareerKickstart is more than just a job search site; it's a partner in your professional development. Join us today to start shaping your future.
-            </p>
-            <br></br>
         </div>
         <div class="container mt-4"> <!-- featured topics section -->
             <h2 class="text-center">Featured Topics</h2>
@@ -68,6 +75,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="container align-items-center justify-content-center mt-4">
+            <p class="lead text-center text-body">
+                Welcome to CareerKickstart, the dedicated platform for interns and graduates seeking guidance in the early stages of their careers. At CareerKickstart, we recognize the challenges that come with transitioning from academic life to professional environments, and we are committed to providing the support necessary for you to navigate this journey effectively.
+            </p>
+            <p class="lead text-center text-body">    
+                Our website offers a range of resources specifically designed for those entering the workforce. Whether you're searching for your first internship, a graduate position, or simply exploring different career options, CareerKickstart is here to assist you. We provide practical advice, professional insights, and a wealth of information to help enhance your job search skills. 
+            </p>
+            <p class="lead text-center text-body">    
+                Explore our database of advice, receive career coaching tailored to your needs, and connect with a network of professionals and like-minded peers. CareerKickstart is more than just a job search site; it's a partner in your professional development. Join us today to start shaping your future.
+            </p>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-center" style="background-image:url('./static/businessquestion.png'); height: 400px;">
+            <div class="text-center">
+              <h1 class="display-2 text-white">Find a Solution to Your Query</h1>
             </div>
         </div>
     </body>

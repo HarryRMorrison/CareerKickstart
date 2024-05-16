@@ -2,8 +2,10 @@ from app import app, db
 from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+from flask_login import current_user, login_user, logout_user, login_required
 from flask import render_template, jsonify, redirect, url_for
 from app.forms import QuestionForm, EditProfileForm, LoginForm, SignupForm
+from random import choice
 
 class PostController():
 
@@ -86,7 +88,19 @@ class SearchController():
     
 class UserController():
 
-    def register():
+    def register(data):
+        pfp = choice(['male1.png','male2.png','male3.png','female1.png','female2.png','female3.png'])
+        user = User(username=data['username'], email=data['email'], profile_pic=pfp)
+        user.set_password(data['password'])
+        db.session.add(user)
+        db.session.commit()
+        UserController.login(data)
+        return
+    
+    def login(data):
+        user_id = User.query.filter_by(username=data['username']).first()
+        login_user(user_id)
+        print(current_user)
         return
     
     def edit_profile():

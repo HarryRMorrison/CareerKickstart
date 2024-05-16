@@ -22,10 +22,10 @@ class Tag(db.Model):
     
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(30), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(30), unique=True)
+    email = db.Column(db.String(100), unique=True)
+    password_hash = db.Column(db.String(128))
     profile_pic = db.Column(db.String(12))
     about_me = db.Column(db.String(200), nullable=True)
 
@@ -39,12 +39,12 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '[<User {}> <User_id {}> <Email {}> <Password {}>]'.format(self.username, self.user_id, self.email, self.password_hash)
+        return '[<User {}> <id {}> <Email {}> <Password {}>]'.format(self.username, self.id, self.email, self.password_hash)
     
 class Question(db.Model):
     __tablename__ = 'questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
@@ -57,7 +57,7 @@ class Question(db.Model):
 
     def __repr__(self):
         return f'''[
-        User:{self.user_id} 
+        User:{self.id} 
         Question:{self.question_id}, 
         Title:{self.title}, 
         Description:{self.description[:20]},
@@ -65,6 +65,13 @@ class Question(db.Model):
         Likes:{self.likes},
         Comments:{self.comments}
         ]'''
+    
+    def associated_tags(self):
+        return [itag.tag.tag for itag in self.tags]
+
+    def to_dict(self):
+        tagz = [itag.tag.tag for itag in self.tags]
+        return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username,'profile_pic':self.user.profile_pic,'date':self.date_created.strftime('%Y-%m-%d')}
     
     
 class Question_Tag(db.Model):
@@ -83,7 +90,7 @@ class Answer(db.Model):
     __tablename__ = 'answers'
     ans_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.question_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     answer = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
     likes = db.Column(db.Integer)
@@ -95,7 +102,7 @@ class Answer(db.Model):
         return f'''
         [Answer:{self.ans_id}
         Question:{self.question_id},
-        User:{self.user_id},
+        User:{self.id},
         Answer:{self.answer[:20]},
         Created:{self.date_created},
         Likes:{self.likes}
