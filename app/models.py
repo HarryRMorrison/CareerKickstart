@@ -44,7 +44,7 @@ class User(UserMixin, db.Model):
 class Question(db.Model):
     __tablename__ = 'questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
@@ -90,7 +90,7 @@ class Answer(db.Model):
     __tablename__ = 'answers'
     ans_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.question_id'))
-    id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     answer = db.Column(db.String(2000), nullable=False)
     date_created = db.Column(db.DateTime, default=func.now())
     likes = db.Column(db.Integer)

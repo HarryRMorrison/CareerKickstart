@@ -3,7 +3,7 @@ from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_login import current_user, login_user, logout_user, login_required
-from flask import render_template, jsonify, redirect, url_for
+from flask import render_template, jsonify, redirect, url_for, flash
 from app.forms import QuestionForm, EditProfileForm, LoginForm, SignupForm
 from random import choice
 
@@ -94,14 +94,17 @@ class UserController():
         user.set_password(data['password'])
         db.session.add(user)
         db.session.commit()
-        UserController.login(data)
-        return
+        return UserController.login(data)
     
     def login(data):
-        user_id = User.query.filter_by(username=data['username']).first()
-        login_user(user_id)
-        print(current_user)
-        return
+        user = User.query.filter_by(username=data['username_email']).first()
+        if user is not None and user.check_password(data['password']):
+            # User exists and password is correct
+            login_user(user)  # Log in user and remember them
+            flash("Login Success!")
+            return redirect('/home')
+        else:
+            return 'Invalid username or password'
     
     def edit_profile():
         form = EditProfileForm()

@@ -22,12 +22,14 @@ def validate_email_exist(form, field):
         raise ValidationError('The username already exists')
     
 def validate_email_or_user(form, field):
-    try:
-        user = User.query.filter_by(email = field.data).first()
-    except:
-        user = User.query.filter_by(username = field.data).first()
-    if not user:
-        raise ValidationError("User doesn't exist")
+    if len(field.data.split('@')) == 2:
+        user_email = User.query.filter_by(email = field.data).first()
+        if not user_email:
+            raise ValidationError("Email doesn't exist")
+    else:
+        user_name = User.query.filter_by(username = field.data).first()
+        if not user_name:
+            raise ValidationError("Username doesn't exist")
     
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)

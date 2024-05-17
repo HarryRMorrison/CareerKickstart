@@ -36,12 +36,9 @@ def load_createpage():
 @app.route('/signup', methods=['POST'])
 def signup():
     form = SignupForm(request.form)
-    print(form.data)
     if form.validate_on_submit():
         print('New User:', form.data)
-        UserController.register(form.data)
-        flash("Login Success!")
-        return redirect('/home')
+        return UserController.register(form.data)
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -50,9 +47,7 @@ def login():
     signup = SignupForm()
     if login.validate_on_submit():
         print('Logging in:', login.data)
-        UserController.login(login.data)
-        flash("Login Success!")
-        return redirect('/home')
+        return UserController.login(login.data)
     return render_template('login.html', form1=login, form2=signup)
 
 @app.route('/logout')

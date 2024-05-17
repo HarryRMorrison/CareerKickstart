@@ -15,10 +15,24 @@ USERS = 200
 Q_NUM = 500
 A_NUM = 1000
 
+def is_unique(name):
+    for guy in users:
+        if name == guy['username']:
+            return is_unique(fake.user_name())
+    return name
+
+def is_unique_e(email):
+    for guy in users:
+        if email == guy['email']:
+            return is_unique_e(fake.email())
+    return email
+
 # Generate 100 users
 for _ in range(USERS):
     username = fake.user_name()
+    username = is_unique(username)
     email = fake.email()
+    email = is_unique_e(email)
     password = fake.password(length=12, special_chars=True, digits=True, upper_case=True, lower_case=True)
     profilpic = random.choice(['male1.png','male2.png','male3.png','female1.png','female2.png','female3.png'])
     users.append({'username':username, 'email':email, 'password':password, 'profile_pic': profilpic})
