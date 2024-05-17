@@ -27,7 +27,7 @@
   #button1 {
     border-bottom-left-radius: var(--dropdown-radius);
     border-top-left-radius: var(--dropdown-radius);
-    
+
 }
 
 #button2 {
@@ -37,6 +37,10 @@
     border-left-color: rgb(83, 83, 83);
     border-width: 1px;
     color: white;
+    position: relative; 
+    right: 0px;
+
+
 }
 
 .post-profile {
@@ -64,8 +68,6 @@
     border-bottom-right-radius: var(--dropdown-radius);
     border-top-right-radius: var(--dropdown-radius);
 }
-
-
 
 .replyPopup-overlay {
 
