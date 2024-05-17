@@ -39,6 +39,7 @@ def signup():
     if form.validate_on_submit():
         print('New User:', form.data)
         return UserController.register(form.data)
+    print('failed to validate')
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -52,5 +53,6 @@ def login():
 
 @app.route('/logout')
 def logout():
+    print("logout:"+current_user.get_id())
     logout_user()
     return redirect('/home')

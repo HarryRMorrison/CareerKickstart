@@ -97,7 +97,10 @@ class UserController():
         return UserController.login(data)
     
     def login(data):
-        user = User.query.filter_by(username=data['username_email']).first()
+        try:
+            user = User.query.filter_by(username=data['username_email']).first()
+        except:
+            user = User.query.filter_by(username=data['username']).first()
         if user is not None and user.check_password(data['password']):
             # User exists and password is correct
             login_user(user)  # Log in user and remember them
