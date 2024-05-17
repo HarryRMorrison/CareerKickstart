@@ -25,6 +25,11 @@ def load_explorepage():
 def send_card_template():
     return render_template('card.html', question={})
 
+@app.route('/post<int pagenum>', methods=['GET'])
+def load_postpage(pagenum):
+    
+    return render_template('request.html')
+
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
 def load_createpage():

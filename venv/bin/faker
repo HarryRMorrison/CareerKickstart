@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/mnt/c/Users/Harry/OneDrive - The University of Western Australia/2024 Sem1/Agile/project/agile-project/venv/bin/python3.10" "$0" "$@"
-' '''
+#!/mnt/c/Users/Harry/Documents/GitHub/CareerKickstart/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
