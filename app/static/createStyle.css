@@ -28,6 +28,10 @@
     font-weight: bold;
 }
 
+#openCreateModal {
+    background-color: rgb(116, 116, 250);
+}
+
 .needs-validation {
     width: 60%;
 }

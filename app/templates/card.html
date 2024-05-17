@@ -15,7 +15,7 @@
         <button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i> {{question.comments}}</button>
         <div class="user-info d-flex align-items-center justify-content-center">
             <img class="profil-pic" src="{{ url_for('static', filename=question.user.profile_pic) }}" style="height: 30px; width: 30px; border-radius: 30px;">
-            <b class="d-inline-block text-truncate" style="max-width: 100px;">{{ question.user.username }}</b>
+            <b class="d-inline-block text-truncate" style="max-width: 100px;"> {{ question.user.username }}</b>
             <i class="ms-2"> {{ question.date_created.date() }}</i>
         </div>
     </div>

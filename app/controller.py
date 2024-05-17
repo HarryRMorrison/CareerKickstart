@@ -56,8 +56,23 @@ class PostController():
         form.set_choices([tag[0] for tag in tag_choices])
         if form.validate_on_submit():
             # Process the validated data
-            print('Validated Form Data:', form.data)
-            return redirect('/home')  # Redirect as necessary
+            submitting_user = User.query.get(int(current_user.get_id()))
+            new_question = Question(title=form.data['title'], description=form.data['description'], likes=0, comments=0,user=submitting_user)
+            db.session.add(new_question)
+            db.session.commit()
+            q_id = new_question.question_id
+            try:
+                for tag in form.data['tags']:
+                    t_id = db.session.query(Tag).filter(Tag.tag==tag).first()
+                    qt=Question_Tag(question_id=q_id,tag_id=t_id.tag_id)
+                    print(qt)
+                    db.session.add(qt)
+                db.session.commit()
+            except:
+                db.session.rollback()
+            print('Question posted:', form.data)
+            flash("Question posted!")
+            return redirect('/explore')  # Redirect as necessary
         return render_template('create.html', form=form, categories=SearchController.get_tags())
     
 class SearchController():

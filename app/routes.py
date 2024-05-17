@@ -55,4 +55,5 @@ def login():
 def logout():
     print("logout:"+current_user.get_id())
     logout_user()
+    flash("Logout Successful")
     return redirect('/home')

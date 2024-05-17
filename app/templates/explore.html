@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="./static/explorePageStyle.css">
         <link rel="stylesheet" type="text/css" href="./static/navbarStyle.css">
         <link rel="stylesheet" type="text/css" href="./static/card.css">
+        <link rel="stylesheet" type="text/css" href="./static/createStyle.css">
         <script src="./static/explorePageJS.js"></script>
         <title>Career Kickstart - Explore</title>
     </head>
@@ -63,7 +64,12 @@
                                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/explore">Explore</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/create">Create</a></li>
+                                    {% if current_user.is_anonymous %}
                                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                                    {% else %}
+                                    <li class="nav-item"><a class="nav-link" href="/explore">Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>

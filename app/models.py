@@ -57,7 +57,7 @@ class Question(db.Model):
 
     def __repr__(self):
         return f'''[
-        User:{self.id} 
+        User:{self.user_id} 
         Question:{self.question_id}, 
         Title:{self.title}, 
         Description:{self.description[:20]},
@@ -84,7 +84,7 @@ class Question_Tag(db.Model):
     question = db.relationship('Question', back_populates='tags')
 
     def __repr__(self):
-        return '[<Tag_id {}> <Question_id {}>]'.format(self.tag_id, self.question_id)
+        return '[<QT_id {}> <Tag_id {}> <Question_id {}>]'.format(self.qt_id ,self.tag_id, self.question_id)
     
 class Answer(db.Model):
     __tablename__ = 'answers'
