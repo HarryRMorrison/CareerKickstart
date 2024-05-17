@@ -11,6 +11,8 @@ class PostController():
 
     def get_top_questions():
         form = QuestionForm()
+        tag_choices = Tag.query.with_entities(Tag.tag).all()
+        form.set_choices([tag[0] for tag in tag_choices])
         top_questions = (
             db.session.query(Question)
             .order_by((Question.likes + Question.comments).desc())
@@ -21,6 +23,8 @@ class PostController():
     
     def get_searched_questions(search):
         form = QuestionForm()
+        tag_choices = Tag.query.with_entities(Tag.tag).all()
+        form.set_choices([tag[0] for tag in tag_choices])
         q_ids = SearchController.search_func(search)
         top_questions = db.session.query(Question).filter(Question.question_id.in_(q_ids)).order_by((Question.likes + Question.comments).desc()).limit(28).all()
         return render_template("explore.html", posts=top_questions,  form=form, categories=SearchController.get_tags())
