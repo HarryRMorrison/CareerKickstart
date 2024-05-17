@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_login import current_user, login_user, logout_user, login_required
 from flask import render_template, jsonify, redirect, url_for, flash
-from app.forms import QuestionForm, EditProfileForm, LoginForm, SignupForm
+from app.forms import QuestionForm, EditProfileForm, LoginForm, SignupForm, AnswerForm
 from random import choice
 
 class PostController():
@@ -20,6 +20,11 @@ class PostController():
             .all()
         )
         return render_template("explore.html", posts=top_questions, form=form, categories=SearchController.get_tags())
+    
+    def get_post_page(pagenum):
+        to_load = Question.query.get(pagenum)
+        form = AnswerForm()
+        return render_template('request.html', question=to_load, form=form)
     
     def get_searched_questions(search):
         form = QuestionForm()
@@ -74,6 +79,13 @@ class PostController():
             flash("Question posted!")
             return redirect('/explore')  # Redirect as necessary
         return render_template('create.html', form=form, categories=SearchController.get_tags())
+    
+    def create_answer(qid,data):
+        submitting_user = User.query.get(int(current_user.get_id()))
+        answer = Answer(question_id=qid, answer=data['answer'], likes=0, user_id=int(current_user.get_id()))
+        db.session.add(answer)
+        db.session.commit()
+        return redirect('/post/'+str(qid))
     
 class SearchController():
 

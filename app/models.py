@@ -102,7 +102,7 @@ class Answer(db.Model):
         return f'''
         [Answer:{self.ans_id}
         Question:{self.question_id},
-        User:{self.id},
+        User:{self.user_id},
         Answer:{self.answer[:20]},
         Created:{self.date_created},
         Likes:{self.likes}

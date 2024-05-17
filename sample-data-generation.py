@@ -189,7 +189,7 @@ try:
         db.session.add(q)
 
     for row in answers:
-        a = Answer(answer=row['answer'], likes=row['likes'], user_id=row['user_id'])
+        a = Answer(answer=row['answer'], likes=row['likes'], user_id=row['user_id'], question_id=row['question_id'])
         db.session.add(a)
 
     for row in questionTags:

@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash
 from app import app, db
 from app.models import User
-from app.forms import LoginForm, SignupForm
+from app.forms import LoginForm, SignupForm, AnswerForm
 from app.controller import PostController, UserController
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -25,10 +25,21 @@ def load_explorepage():
 def send_card_template():
     return render_template('card.html', question={})
 
-@app.route('/post<int pagenum>', methods=['GET'])
-def load_postpage(pagenum):
+@app.route('/newanswer/<int:qid>/', methods = ['POST'])
+def make_new_answer(qid):
+    if not current_user.is_authenticated:
+        flash("Login or Sign up to Answer a Question")
+        return redirect(url_for('login'))
+    form = AnswerForm(request.form)
+    if form.validate_on_submit():
+        print('New Answer:', form.data)
+        return PostController.create_answer(qid,form.data)
+    return jsonify({"error":"An error occurred"}), 500
     
-    return render_template('request.html')
+
+@app.route('/post/<int:pagenum>', methods=['GET'])
+def load_postpage(pagenum):
+    return PostController.get_post_page(pagenum)
 
 @app.route('/create', methods=['GET', 'POST'])
 @login_required

@@ -15,7 +15,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
   ENV='development'
-  DEBUG=True
+  FLASK_DEBUG=1
 
 class TestingConfig(Config):
   ENV='testing'
