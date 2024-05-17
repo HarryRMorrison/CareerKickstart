@@ -126,13 +126,15 @@
                             <script>
                                 function addFn() {
                                     const divEle = document.getElementById("inputFields");
-                                    const wrapper = document.createElement("div");
-                                    const iFeild = document.createElement("input");
-                                    iFeild.setAttribute("type", "text");
-                                    iFeild.setAttribute("placeholder", "Type answer here");
-                                    iFeild.classList.add("input-field");
-                                    wrapper.appendChild(iFeild);
-                                    divEle.appendChild(wrapper);
+                                    if (divEle.childElementCount === 0) {
+                                        const wrapper = document.createElement("div");
+                                        const iField = document.createElement("input");
+                                        iField.setAttribute("type", "text");
+                                        iField.setAttribute("placeholder", "Type answer here");
+                                        iField.classList.add("input-field");
+                                        wrapper.appendChild(iField);
+                                        divEle.appendChild(wrapper);
+                                    }
                                 }
                             </script>
 
