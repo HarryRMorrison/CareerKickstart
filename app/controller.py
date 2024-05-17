@@ -10,18 +10,20 @@ from random import choice
 class PostController():
 
     def get_top_questions():
+        form = QuestionForm()
         top_questions = (
             db.session.query(Question)
             .order_by((Question.likes + Question.comments).desc())
             .limit(28)
             .all()
         )
-        return render_template("explore.html", posts=top_questions)
+        return render_template("explore.html", posts=top_questions, form=form, categories=SearchController.get_tags())
     
     def get_searched_questions(search):
+        form = QuestionForm()
         q_ids = SearchController.search_func(search)
         top_questions = db.session.query(Question).filter(Question.question_id.in_(q_ids)).order_by((Question.likes + Question.comments).desc()).limit(28).all()
-        return render_template("explore.html", posts=top_questions)
+        return render_template("explore.html", posts=top_questions,  form=form, categories=SearchController.get_tags())
     
     def get_next_question_set(page_num):
         next_set = (

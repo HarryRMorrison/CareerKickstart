@@ -1,0 +1,45 @@
+<form class="container" action="/create" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control", id="title") }}
+        {% for error in form.title.errors %}
+        <span style="color:red;">[{{ error}}]</span>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label mt-4") }}
+          {{ form.description(class="form-control", id="description", rows=3, required=True) }}
+        {% for error in form.description.errors %}
+        <span style="color:red;">[{{ error}}]</span>
+        {% endfor %}
+    </div>
+    <p>{{ form.tags.label }}<br></p>
+    <div class="dropdown-center d-flex row mt-4">
+        {% for name, tags in categories.items() %}
+        <div class="col">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="chosen{{ name }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ name.capitalize() }}</button>
+            <ul class="dropdown-menu" aria-labelledby="chosen{{ name }}">
+                {{ form.tags }}
+                {% for checkbox in form.tags %}
+                    {% if checkbox.label.text in tags %}
+                    <li>
+                        <a class="dropdown-item">
+                            <label>{{ checkbox() }} {{ checkbox.label }}</label>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    {% if form.tags.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.tags.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {{ form.submit(id="createQuestion", class="btn btn-primary mt-4", type="submit") }}
+</form>
