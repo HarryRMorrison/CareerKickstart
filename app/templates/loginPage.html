@@ -10,21 +10,21 @@
         <script src="loginPageJS.js"></script>
     </head>
     <body>
-        <form action="/action_page.php" id="loginform"> <!--placeholder location-->
+        <form action="/login" method="post" id="loginform">
             <label for="username">Username or email:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
-            <input type="text" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password"><br><br>
             <button type="submit">Login</button>
         </form> 
 
-        <form action="/action_page.php" id="signupform"> <!--placeholder location-->
+        <form action="/signup" method="post" id="signupform">
             <label for="email">Email address:</label><br>
             <input type="text" id="email" name="email"><br>
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
-            <input type="text" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password"><br><br>
             <button type="submit" formmethod="post">Sign up</button>
         </form> 
     </body>

@@ -1,5 +1,7 @@
 venv/
+.venv/
 *.db
-.vscode/*
-app/__pycache__/*
-__/__pycache__/*
+.vscode/
+app/__pycache__/
+__pycache__/
+CKapp.db
