@@ -56,6 +56,4 @@ function vote(type) {
         voteCount--;
     }
     voteCountElement.textContent = voteCount;
-
-    // Optional: send vote to server
 }
