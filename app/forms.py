@@ -30,7 +30,7 @@ def validate_email_or_user(form, field):
         user_name = User.query.filter_by(username = field.data).first()
         if not user_name:
             raise ValidationError("Username doesn't exist")
-    
+
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()

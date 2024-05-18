@@ -22,9 +22,11 @@
                     <h6>{{ user.email }}</h6>
                     <h6>Questions: {{ user.numQ }}</h6>
                     <h6>Answers: {{ user.numA }}</h6>
+                    {% if current_user.get_id()==user.id %}
                     <button id="openCreateModal" data-bs-toggle="modal" data-bs-target="#createModal">
                         Edit Profile
                     </button>
+                    {% endif %}
                 </div>
                 {% if current_user.get_id()==user.id %}
                 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">

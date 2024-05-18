@@ -1,16 +1,17 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash
-from app import app, db
+from app import db
+from app.blueprints import main
 from app.models import User, Question, Answer
 from app.forms import LoginForm, SignupForm, AnswerForm, EditProfileForm
 from app.controller import PostController, UserController
 from flask_login import current_user, login_user, logout_user, login_required
 
-@app.route('/')
-@app.route('/home')
+@main.route('/')
+@main.route('/home')
 def index():
     return render_template('home.html')
 
-@app.route('/explore', methods=['GET'])
+@main.route('/explore', methods=['GET'])
 def load_explorepage():
     arguments = request.args
     if len(arguments) > 0:
@@ -21,15 +22,15 @@ def load_explorepage():
     else:
         return PostController.get_top_questions()
 
-@app.route('/getcard', methods = ['GET'])
+@main.route('/getcard', methods = ['GET'])
 def send_card_template():
     return render_template('card.html', question={})
 
-@app.route('/newanswer/<int:qid>/', methods = ['POST'])
+@main.route('/newanswer/<int:qid>/', methods = ['POST'])
 def make_new_answer(qid):
     if not current_user.is_authenticated:
         flash("Login or Sign up to Answer a Question")
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     form = AnswerForm(request.form)
     if form.validate_on_submit():
         print('New Answer:', form.data)
@@ -37,28 +38,30 @@ def make_new_answer(qid):
     return jsonify({"error":"An error occurred"}), 500
     
 
-@app.route('/post/<int:pagenum>', methods=['GET'])
+@main.route('/post/<int:pagenum>', methods=['GET'])
 def load_postpage(pagenum):
     return PostController.get_post_page(pagenum)
 
-@app.route('/create', methods=['GET', 'POST'])
+@main.route('/create', methods=['GET', 'POST'])
 @login_required
 def load_createpage():
+    print('\oneone\n')
     if not current_user.is_authenticated:
         flash("Login or Sign up to Post a Question")
-        return redirect(url_for('login'))
+        print('\nhere\n')
+        return redirect(url_for('main.login'))
     return PostController.create_post()
 
-@app.route('/signup', methods=['POST'])
+@main.route('/signup', methods=['POST'])
 def signup():
     form = SignupForm(request.form)
     if form.validate_on_submit():
         print('New User:', form.data)
         return UserController.register(form.data)
     print('failed to validate')
-    return redirect(url_for('login'))
+    return redirect(url_for('main.login'))
 
-@app.route('/login', methods=['POST', 'GET'])
+@main.route('/login', methods=['POST', 'GET'])
 def login():
     login = LoginForm()
     signup = SignupForm()
@@ -67,23 +70,23 @@ def login():
         return UserController.login(login.data)
     return render_template('login.html', form1=login, form2=signup)
 
-@app.route('/logout')
+@main.route('/logout')
 def logout():
     print("logout:"+current_user.get_id())
     logout_user()
     flash("Logout Successful")
     return redirect('/home')
 
-@app.route('/profilepage/<Username>', methods=['GET', 'POST'])
+@main.route('/profilepage/<Username>', methods=['GET', 'POST'])
 @login_required
 def load_profile_page(Username):
     if not current_user.is_authenticated:
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     return UserController.edit_profile(Username)
 
-@app.route('/currentpfp', methods=['GET'])
+@main.route('/currentpfp', methods=['GET'])
 @login_required
 def current_user_profile_page():
     if not current_user.is_authenticated:
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     return redirect('/profilepage/'+User.query.get(current_user.get_id()).username)

@@ -1,4 +1,5 @@
-from app import app, db
+from app import db
+from app.blueprints import main
 from app.models import User, Tag, Question, Answer, Question_Tag
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
@@ -140,7 +141,8 @@ class UserController():
             flash("Login Success!")
             return redirect('/home')
         else:
-            return 'Invalid username or password'
+            flash("Password doesn't match")
+            return redirect(url_for('main.login'))
         
     def edit_profile(Username):
         form=EditProfileForm()
@@ -161,23 +163,9 @@ class UserController():
                 user.username = form.username.data
                 print('Changed User name:'+form.username.data)
             if form.new_password.data != '':
-                user.user.set_password(form.new_password.data)
+                user.set_password(form.new_password.data)
                 print('Changed User password:'+form.new_password.data)
             db.session.commit()
             form=EditProfileForm()
             return render_template('profilePage.html',posts=posts,form=form,user=user_info.to_dict_pfp())
-        return render_template('profilePage.html',posts=posts,form=form,user=user_info.to_dict_pfp()) 
-
-
-    def edi2t_profile():
-        form = EditProfileForm()
-        if form.validate_on_submit():
-            current_user.username = form.username.data
-            current_user.about_me = form.about_me.data
-            db.session.commit()
-            flash('Your changes have been saved.')
-            return redirect(url_for('edit_profile'))
-        elif request.method == 'GET':
-            form.username.data = current_user.username
-            form.about_me.data = current_user.about_me
-        return render_template('edit_profile.html', title='Edit Profile',form=form)
+        return render_template('profilePage.html',posts=posts,form=form,user=user_info.to_dict_pfp())

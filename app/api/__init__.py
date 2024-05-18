@@ -1,2 +1,2 @@
 from app.api import question_api
-from app import app
+from app.blueprints import main

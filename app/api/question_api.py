@@ -1,10 +1,11 @@
-from app import app, db
+from app import db
+from app.blueprints import main
 from app.models import Question, Tag, Answer
 from app.api.errors import bad_request, error_response
 from flask import jsonify, url_for, request
 from app.controller import PostController, SearchController
 
-@app.route('/api/explore/', methods=['GET'])
+@main.route('/api/explore/', methods=['GET'])
 def get_next_questions():
     arguments = request.args
     if len(arguments)>1:
@@ -12,11 +13,11 @@ def get_next_questions():
     else:
         return PostController.get_next_question_set(int(arguments.get('page','')))
 
-@app.route('/api/filter-retrieve', methods=['GET'])
+@main.route('/api/filter-retrieve', methods=['GET'])
 def get_filters():
     return jsonify(SearchController.get_tags())
 
-@app.route('/api/likeadjust/', methods=['PUT'])
+@main.route('/api/likeadjust/', methods=['PUT'])
 def adjust_likes():
     questionid = request.args.get('qid', type=int)
     num = request.args.get('num', type=int)
@@ -34,7 +35,7 @@ def adjust_likes():
         return jsonify({"error": str(e)}), 500
     return jsonify({"likes": post.likes})
 
-@app.route('/api/likeadjust/answer/', methods=['PUT'])
+@main.route('/api/likeadjust/answer/', methods=['PUT'])
 def adjust_likes_ans():
     ans_id = request.args.get('ans_id', type=int)
     num = request.args.get('num', type=int)

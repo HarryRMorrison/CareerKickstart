@@ -78,6 +78,8 @@ class Question(db.Model):
         tagz = [itag.tag.tag for itag in self.tags]
         return {'question_id':self.question_id,'title':self.title,'description':self.description,'likes':self.likes,'comments':self.comments,'tags':tagz,'user':self.user.username,'profile_pic':self.user.profile_pic,'date':self.date_created.strftime('%Y-%m-%d')}
     
+    def get_user(self):
+        return self.user.username
     
 class Question_Tag(db.Model):
     __tablename__ = 'question_tags'
@@ -91,6 +93,7 @@ class Question_Tag(db.Model):
     def __repr__(self):
         return '[<QT_id {}> <Tag_id {}> <Question_id {}>]'.format(self.qt_id ,self.tag_id, self.question_id)
     
+
 class Answer(db.Model):
     __tablename__ = 'answers'
     ans_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
