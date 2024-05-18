@@ -1,15 +1,16 @@
 from flask import render_template, request, jsonify, redirect, url_for
-from flask_login import login_required, current_user, login_user, logout_user
+from flask_login import login_required, current_user
 from app import app, db
-from app.models import User, Answer
+from app.models import User, Question, Answer
 from app.forms import LoginForm, SignupForm, QuestionForm
+from app.controller import PostController
 
 @app.route('/')
 @app.route('/index')
 def index():
     return "Hello, World!"
 
-@app.route('/getcard', methods = ['GET'])
+@app.route('/getcard', methods=['GET'])
 def send_card_template():
     question_demo = {}
     return render_template('card.html', question=question_demo)
@@ -47,8 +48,35 @@ def login():
         password = form.password.data
         user = User.query.filter((User.username == username_email) | (User.email == username_email)).first()
         if user and user.check_password(password):
+            login_user(user)
             return jsonify({"message": "Logged in."}), 200
     return jsonify({"error": "Entered credentials are invalid."}), 401
+
+@app.route('/question/<int:question_id>', methods=['GET'])
+def get_question(question_id):
+    question = Question.query.get_or_404(question_id)
+    answers = Answer.query.filter_by(question_id=question_id).order_by(Answer.date_created.desc()).all()
+
+    question_data = {
+        'title': question.title,
+        'description': question.description,
+        'user': {
+            'username': question.user.username,
+            'profile_photo': question.user.profile_photo if hasattr(question.user, 'profile_photo') else 'default_profile_photo.jpg',
+        },
+        'votes': question.likes,
+        'answers': [{
+            'answer': answer.answer,
+            'user': {
+                'username': answer.user.username,
+                'profile_photo': answer.user.profile_photo if hasattr(answer.user, 'profile_photo') else 'default_profile_photo.jpg',
+            }
+        } for answer in answers]
+    }
+    if request.headers.get('Accept') == 'application/json':
+        return jsonify(question_data)
+    
+    return render_template('requestPage.html', question=question, answers=answers, current_user=current_user)
 
 @app.route('/answer', methods=['POST'])
 @login_required
@@ -66,13 +94,23 @@ def create_answer():
     db.session.add(answer)
     db.session.commit()
     return jsonify({"message": "Answer created successfully.", "answer": answer.to_dict()}), 201
-    def to_dict(self):
-        return {
-            "ans_id": self.ans_id,
-            "question_id": self.question_id,
-            "user_id": self.user_id,
-            "answer": self.answer,
-            "date_created": self.date_created,
-            "likes": self.likes
-        }
-Answer.to_dict = to_dict
+
+@app.route('/explore')
+def explore():
+    return PostController.get_top_questions()
+
+@app.route('/search', methods=['GET'])
+def search():
+    search_query = request.args.get('q')
+    return PostController.get_searched_questions(search_query)
+
+@app.route('/nextset', methods=['GET'])
+def next_set():
+    page_num = request.args.get('page', 1, type=int)
+    return PostController.get_next_question_set(page_num)
+
+@app.route('/nextsearch', methods=['GET'])
+def next_search():
+    page_num = request.args.get('page', 1, type=int)
+    arguments = request.args.to_dict()
+    return PostController.get_next_searched_questions(arguments, page_num)
