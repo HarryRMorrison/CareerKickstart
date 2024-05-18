@@ -5,6 +5,15 @@ Our website offers a range of resources specifically designed for those entering
 
 Explore our database of opportunities, receive career coaching tailored to your needs, and connect with a network of professionals and like-minded peers. CareerKickstart is more than just a job search site; it's a partner in your professional development. Join us today to start shaping your future.
 
+## Setup
+Set up a virtual environment in Unix:
+1. Use pip or another package manager to install virtualenv package <code>pip install virtualenv</code>
+3. Install a venv environment <code>python -m venv venv</code> and install packages <code>pip install -r requirements.txt</code>
+2. Start the virtual environment <code>source virtual-environment/bin/activate</code> This should include flask and all the required packages
+Install sqlite
+4. Install sqlite3 <code>sudo apt-get install sqlite</code>
+5. Build the database: <code>flask db init</code>
+
 ## Getting Started
 1. Activate the Virtual Environment
     - <code>source venv/bin/activate</code>
@@ -13,20 +22,15 @@ Explore our database of opportunities, receive career coaching tailored to your 
     - <code>Flask run</code>
 
 3. Stopping the Server:
-    - <code>cntrl + c</code>
+    - <code>^C</code>
 
 4. Deactivating the Virtual Environment:
     - <code>deactivate</code>
 
-## Setup
-Set up a virtual environment in Unix:
-1. Use pip or another package manager to install virtualenv package <code>pip install virtualenv</code>
-3. Install a venv environment <code>python3.12 -m venv venv</code> and install packages <code>pip install -r requirements.txt</code>
-2. Start the virtual environment <code>source virtual-environment/bin/activate</code> This should include flask and all the required packages
-Install sqlite
-4. Install sqlite3 <code>sudo apt-get install sqlite</code>
-5. Build the database: <code>flask db init</code>
-6. <code>flask run</code>
+## Running the tests
+To run unit tests: <code>python -m tests.unittest</code>
+
+To run selenium tests: <code>python -m tests.systemtest</code>
 
 ## Useful Functions
 Start the python interpreter in context of application (pre-import “app”)
@@ -51,7 +55,7 @@ Upgrade to all tables:
 via localhost
 
 ## Built With
-VScode and git
+VScode, git, flask
 
 ## Source Code
 https://github.com/HarryRMorrison/CareerKickstart

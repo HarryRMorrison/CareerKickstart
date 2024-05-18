@@ -14,6 +14,6 @@ class DevelopmentConfig(Config):
 	FALSK_DEBUG=1
 
 class TestingConfig(Config):
-	ENV='testing'
-	TESTING=True
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory'
+	#ENV='testing'
+	#TESTING=True
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
