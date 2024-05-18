@@ -12,9 +12,11 @@
     </div>
     <div class="card-action d-flex">
         <button class="like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i> {{question.likes}}</button>
-        <button aria-pressed="false" type="button"><i class="fa fa-comments-o"></i> {{question.comments}}</button>
+        <button class="comment" aria-pressed="false" type="button"><i class="fa fa-comments-o"></i> {{question.comments}}</button>
         <div class="user-info d-flex align-items-center justify-content-center">
-            <img class="profil-pic" src="{{ url_for('static', filename=question.user.profile_pic) }}" style="height: 30px; width: 30px; border-radius: 30px;">
+            <a href="/profilepage/{{ question.user.username }}">
+                <img class="profil-pic" src="{{ url_for('static', filename=question.user.profile_pic) }}" style="height: 30px; width: 30px; border-radius: 30px;">
+            </a>
             <b class="d-inline-block text-truncate" style="max-width: 100px;"> {{ question.user.username }}</b>
             <i class="ms-2"> {{ question.date_created.date() }}</i>
         </div>

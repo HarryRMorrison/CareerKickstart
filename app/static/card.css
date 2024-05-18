@@ -11,6 +11,10 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.card-title:hover, .card-body:hover {
+  cursor:pointer;
+}
+
 .card-body {
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;

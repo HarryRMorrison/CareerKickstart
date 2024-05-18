@@ -41,6 +41,11 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '[<User {}> <id {}> <Email {}> <Password {}>]'.format(self.username, self.id, self.email, self.password_hash)
     
+    def to_dict_pfp(self):
+        numQ = Question.query.filter_by(user_id=self.id).count()
+        numA = Answer.query.filter_by(user_id=self.id).count()
+        return {'id':str(self.id),'username':self.username, 'email':self.email, 'aboutme':self.about_me, 'numQ':numQ, 'numA':numA, 'pfp':self.profile_pic}
+    
 class Question(db.Model):
     __tablename__ = 'questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

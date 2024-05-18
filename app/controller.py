@@ -141,8 +141,35 @@ class UserController():
             return redirect('/home')
         else:
             return 'Invalid username or password'
-    
-    def edit_profile():
+        
+    def edit_profile(Username):
+        form=EditProfileForm()
+        user_info = User.query.filter_by(username=Username).first()
+        if user_info is None:
+            return jsonify({"error": "Question not found"}), 404
+        user_q = Question.query.filter_by(user_id=user_info.id).all()
+        user_a = Answer.query.filter_by(user_id=user_info.id).all()
+        posts = user_q
+        for ans in user_a:
+            posts.append(ans.question)
+        if form.validate_on_submit():
+            user = User.query.get(current_user.get_id())
+            if form.about_me.data != '':
+                user.about_me = form.about_me.data
+                print('Changed User about me:'+form.about_me.data)
+            if form.username.data != '':
+                user.username = form.username.data
+                print('Changed User name:'+form.username.data)
+            if form.new_password.data != '':
+                user.user.set_password(form.new_password.data)
+                print('Changed User password:'+form.new_password.data)
+            db.session.commit()
+            form=EditProfileForm()
+            return render_template('profilePage.html',posts=posts,form=form,user=user_info.to_dict_pfp())
+        return render_template('profilePage.html',posts=posts,form=form,user=user_info.to_dict_pfp()) 
+
+
+    def edi2t_profile():
         form = EditProfileForm()
         if form.validate_on_submit():
             current_user.username = form.username.data

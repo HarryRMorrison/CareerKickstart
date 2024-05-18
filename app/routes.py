@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash
 from app import app, db
-from app.models import User
-from app.forms import LoginForm, SignupForm, AnswerForm
+from app.models import User, Question, Answer
+from app.forms import LoginForm, SignupForm, AnswerForm, EditProfileForm
 from app.controller import PostController, UserController
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -73,3 +73,17 @@ def logout():
     logout_user()
     flash("Logout Successful")
     return redirect('/home')
+
+@app.route('/profilepage/<Username>', methods=['GET', 'POST'])
+@login_required
+def load_profile_page(Username):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return UserController.edit_profile(Username)
+
+@app.route('/currentpfp', methods=['GET'])
+@login_required
+def current_user_profile_page():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return redirect('/profilepage/'+User.query.get(current_user.get_id()).username)

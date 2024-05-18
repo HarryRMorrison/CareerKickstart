@@ -24,7 +24,7 @@
                             <h3>{{ question.user.username }}</h3>
                             <h5>{{ question.date_created.date() }}</h5>
                             <div class="d-flex">
-                                <button class="main-buttons" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i> {{question.likes}}</button>
+                                <button class="like main-buttons" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i> {{question.likes}}</button>
                                 <button data-bs-toggle="modal" data-bs-target="#createModal" class="main-buttons" aria-pressed="false" type="button"><i class="fa fa-comments-o"></i> {{question.comments}}</button>
                             </div>
                         </div>

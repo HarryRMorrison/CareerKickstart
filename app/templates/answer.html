@@ -3,7 +3,7 @@
         <div class="user-info d-flex align-items-center justify-content-center">
             <button class="a-like" aria-pressed="false" type="button"><i class="fa fa-thumbs-o-up"></i> {{answer.likes}}</button>
             <img class="profil-pic" src="{{ url_for('static', filename=answer.user.profile_pic) }}" style="height: 30px; width: 30px; border-radius: 30px;">
-            <b class="d-inline-block text-truncate" style="max-width: 100px;"> {{ answer.user.username }}</b>
+            <b> {{ answer.user.username }}</b>
             <i class="ms-2"> {{ answer.date_created.date() }}</i>
         </div>
     </div>

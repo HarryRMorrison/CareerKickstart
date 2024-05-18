@@ -36,8 +36,9 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget = widgets.CheckboxInput()
 
 class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[validate_user_exist])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    new_password = PasswordField('New Password')
     submit = SubmitField('Submit')
 
 class QuestionForm(FlaskForm):

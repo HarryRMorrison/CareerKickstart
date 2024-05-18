@@ -103,5 +103,17 @@ $(document).ready(function() {
             like_adjust(questionid, -1);
             $(this).attr('aria-pressed',"false");
         }
+    });
+    $('.card-body').click(function(){
+        qid =  $(this).closest('.card').attr('id');
+        window.location.href = "/post/"+qid;
+    });
+    $('.card-title').click(function(){
+        qid =  $(this).closest('.card').attr('id');
+        window.location.href = "/post/"+qid;
+    })
+    $('.comment').click(function(){
+        qid =  $(this).closest('.card').attr('id');
+        window.location.href = "/post/"+qid;
     })
 });

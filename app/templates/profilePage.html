@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="profilePageStyleSheet.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbarStyle.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='card.css') }}">
+    </head>
+
+    <body>
+        {% include "navbar.html" %}
+        <div class="container m-4">
+            <div class="user-info d-flex">
+                <img class="profil-pic" src="{{ url_for('static', filename=user.pfp) }}" style="height: 200px; width: 200px; border-radius: 30px;">
+                <div id="user-post-related" class="mx-4 mt-3">    
+                    <h3>{{ user.username }}</h3>
+                    <h6>{{ user.email }}</h6>
+                    <h6>Questions: {{ user.numQ }}</h6>
+                    <h6>Answers: {{ user.numA }}</h6>
+                    <button id="openCreateModal" data-bs-toggle="modal" data-bs-target="#createModal">
+                        Edit Profile
+                    </button>
+                </div>
+                {% if current_user.get_id()==user.id %}
+                <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createModalLabel">Edit Profile</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                    {{ form.hidden_tag() }}
+                                    <p>
+                                        {{ form.username.label }}<br>
+                                        {{ form.username(size=32) }}<br>
+                                        {% for error in form.username.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </p>
+                                    <p>
+                                        {{ form.about_me.label }}<br>
+                                        {{ form.about_me(cols=50, rows=4) }}<br>
+                                        {% for error in form.about_me.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </p>
+                                    <p>
+                                        {{ form.new_password.label }}<br>
+                                        {{ form.new_password }}
+                                        {% for error in form.new_password.errors %}
+                                        <span style="color:red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </p>
+                                    <p>{{ form.submit() }}</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div id="aboutme" class="mt-4">
+                    <h6>About me:</h6>
+                    <p>{{ user.aboutme }}</p>
+                </div>
+            </div>
+            <div id="involved-in" class="row mt-4">
+                <div class="col">
+                {% for question in posts[0::3] %}
+                    {% include 'card.html' %}
+                {% endfor %}
+                </div>
+                <div class="col">
+                {% for question in posts[1::3] %}
+                    {% include 'card.html' %}
+                {% endfor %}
+                </div>
+                <div class="col">
+                {% for question in posts[2::3] %}
+                    {% include 'card.html' %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
