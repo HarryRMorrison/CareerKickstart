@@ -58,6 +58,17 @@ class Question(db.Model):
         Likes:{self.likes},
         Comments:{self.comments}
         ]'''
+    def to_dict(self):
+        return {
+            'question_id': self.question_id,
+            'title': self.title,
+            'description': self.description,
+            'user_id': self.user_id,
+            'username': self.user.username,
+            'profile_photo': 'path_to_profile_photo',  # Modify this to use the actual profile photo path
+            'votes': self.likes,
+            'answers': [answer.to_dict() for answer in self.answers]
+        }
     
     
 class Question_Tag(db.Model):
@@ -93,3 +104,14 @@ class Answer(db.Model):
         Created:{self.date_created},
         Likes:{self.likes}
         ]'''
+    def to_dict(self):
+        return {
+            'ans_id': self.ans_id,
+            'question_id': self.question_id,
+            'user_id': self.user_id,
+            'username': self.user.username,
+            'profile_photo': 'path_to_profile_photo',  # Modify this to use the actual profile photo path
+            'answer': self.answer,
+            'created': self.date_created,
+            'likes': self.likes
+        }
