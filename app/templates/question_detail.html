@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Detail</title>
+</head>
+<body>
+    <h1>Question Detail</h1>
+    <div>
+        <h2>{{ question.title }}</h2>
+        <p>{{ question.description }}</p>
+    </div>
+    <hr>
+    <div>
+        <h3>Answers</h3>
+        <ul>
+            {% for answer in question.answers %}
+                <li>{{ answer.answer }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <hr>
+    {% if current_user.is_authenticated %}
+        <h3>Submit Your Answer</h3>
+        <form id="answerForm">
+            <textarea id="answerText" rows="4" cols="50" placeholder="Enter your answer" required></textarea><br>
+            <button type="submit">Submit Answer</button>
+        </form>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">login</a> to submit an answer.</p>
+    {% endif %}
+
+    <script>
+        document.getElementById("answerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            submitAnswer();
+        });
+
+        function submitAnswer() {
+            var answerText = document.getElementById("answerText").value;
+            var questionId = "{{ question.question_id }}";
+
+            fetch("/answer", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({
+                    "question_id": questionId,
+                    "answer": answerText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // You can handle the response here, e.g., display a success message or refresh the page
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    </script>
+</body>
+</html>
