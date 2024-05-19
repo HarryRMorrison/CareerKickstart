@@ -5,6 +5,11 @@ Our website offers a range of resources specifically designed for those entering
 
 Explore our database of opportunities, receive career coaching tailored to your needs, and connect with a network of professionals and like-minded peers. CareerKickstart is more than just a job search site; it's a partner in your professional development. Join us today to start shaping your future.
 
+## Design
+The design of a Flask application involves setting up a Python-based web framework that is both simple and extensible. Initially, you would set up a virtual environment and install Flask. The core of a Flask application includes an application file, 'carreer-kickstart.py', which configures and creates an instance of the Flask class. Routes are defined in this file or in associated modules using decorators to link view functions to URLs, handling web page requests and determining the content to be displayed. The application uses Jinja2 templates for HTML content rendering, allowing dynamic generation of web pages with placeholders for data filled during runtime. Static files like CSS, JavaScript, and images are stored separately to manage presentation and functionality. Blueprints are used to organize the application into modular components, each capable of functioning independently. The application configuration might include details such as database connections, secret keys, and third-party services, often loaded from a configuration object or file. Flask can integrate with databases using extensions like SQLAlchemy and manage errors through custom handlers, ensuring robustness. SQLalchemy is good as it implements user authentication using Flask-Login, avoids CSS attacks and together with WTForms, it avoids CRSF attacks. Running the Flask app involves starting a development server with 'flask run', which serves the application to users.
+
+The database was designed on the components other help forums have incommon. Questions, answers, tags and users. These form the base components. A relationship table was set up for Question tags as it increased efficiency and decreased storage capacity. Numerous help functions are used through the application.
+
 ## Setup
 Set up a virtual environment in Unix:
 1. Use pip or another package manager to install virtualenv package <code>pip install virtualenv</code>
@@ -13,6 +18,7 @@ Set up a virtual environment in Unix:
 Install sqlite
 4. Install sqlite3 <code>sudo apt-get install sqlite</code>
 5. Build the database: <code>flask db init</code>
+6. To create a database sample with data <code>python "sample-data-generation"</code>
 
 ## Getting Started
 1. Activate the Virtual Environment
