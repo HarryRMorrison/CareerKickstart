@@ -49,9 +49,9 @@ class SeleniumTests(unittest.TestCase):
         self.driver.implicitly_wait(5)
 
         # Enter username and password
-        self.driver.find_element_by_id('username_email').send_keys('user1')
-        self.driver.find_element_by_name('password').send_keys('qwerty')
-        self.driver.find_element_by_name('submit').click()
+        self.driver.find_element(by_id('username_email').send_keys('user1')
+        self.driver.find_element(by_name('password').send_keys('qwerty')
+        self.driver.find_element(by_name('submit').click()
 
         # Check for login success by finding the profile link
         profile_link = self.driver.find_element_by_partial_link_text('Profile')
