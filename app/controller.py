@@ -22,8 +22,8 @@ class PostController():
         )
         return render_template("explore.html", posts=top_questions, form=form, categories=SearchController.get_tags())
     
-    def get_post_page(pagenum):
-        to_load = Question.query.get(pagenum)
+    def get_post_page(question_id):
+        to_load = Question.query.get_or_404(question_id)
         form = AnswerForm()
         return render_template('request.html', question=to_load, form=form)
     

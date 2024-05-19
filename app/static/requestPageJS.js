@@ -11,6 +11,10 @@ function like_adjust(questionid, adjust){
                 console.log(adjust)
                 $('#'+questionid).find('.like').html('<i class="fa fa-thumbs-o-up"></i> '+result.likes)
             }
+        },
+        error: function(error) {
+            alert("Error adjusting like!");
+            console.error(error);
         } 
     });
     return
@@ -29,6 +33,10 @@ function a_like_adjust(ans_id, adjust){
                 console.log(adjust)
                 $('#'+ans_id).find('.a-like').html('<i class="fa fa-thumbs-o-up"></i> '+result.likes)
             }
+        },
+        error: function(error) {
+            alert("Error adjusting like!");
+            console.error(error);
         } 
     });
     return
