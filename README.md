@@ -31,6 +31,7 @@ Install sqlite
 To run unit tests: <code>python -m tests.unittest</code>
 
 To run selenium tests: <code>python -m tests.systemtest</code>
+- You may find issues in your environment, if so run this Unix line <code>sudo apt install chromium-chromedriver</code>
 
 ## Useful Functions
 Start the python interpreter in context of application (pre-import “app”)

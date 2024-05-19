@@ -45,10 +45,8 @@ def load_postpage(pagenum):
 @main.route('/create', methods=['GET', 'POST'])
 @login_required
 def load_createpage():
-    print('\oneone\n')
     if not current_user.is_authenticated:
         flash("Login or Sign up to Post a Question")
-        print('\nhere\n')
         return redirect(url_for('main.login'))
     return PostController.create_post()
 
