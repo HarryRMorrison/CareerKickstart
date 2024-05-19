@@ -106,14 +106,14 @@ $(document).ready(function() {
     });
     $('.card-body').click(function(){
         qid =  $(this).closest('.card').attr('id');
-        window.location.href = "/post/"+qid;
+        window.location.href = "/question/"+qid;
     });
     $('.card-title').click(function(){
         qid =  $(this).closest('.card').attr('id');
-        window.location.href = "/post/"+qid;
+        window.location.href = "/question/"+qid;
     })
     $('.comment').click(function(){
         qid =  $(this).closest('.card').attr('id');
-        window.location.href = "/post/"+qid;
+        window.location.href = "/question/"+qid;
     })
 });

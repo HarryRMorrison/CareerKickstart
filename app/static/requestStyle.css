@@ -1,3 +1,9 @@
+.question-area {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+}
+
 .card {
     border-radius: 30px;
     margin-bottom: 20px;
@@ -64,11 +70,17 @@
     background-color: rgb(146, 146, 146);
 }
 
-#user-post-related{
+#user-post-related {
     margin-left: 10px;
 }
 
 .answer-action {
     margin-left: 16px;
     margin-top: 6px;
+}
+
+.card-header {
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+    background-color: #fff;
 }

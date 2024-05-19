@@ -7,15 +7,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="profilePageStyleSheet.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profilePage.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbarStyle.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='card.css') }}">
+        <script src="{{ url_for('static', filename='ProfilePageJS.js') }}"></script>
     </head>
 
     <body>
         {% include "navbar.html" %}
-        <div class="container m-4">
-            <div class="user-info d-flex">
+        <div class="container m-4 profile mx-auto">
+            <div class="my-3">
+                <h3>Profile</h3>
+                <hr>
+            </div>
+            <div class="user-info d-flex" id="main-user">
                 <img class="profil-pic" src="{{ url_for('static', filename=user.pfp) }}" style="height: 200px; width: 200px; border-radius: 30px;">
                 <div id="user-post-related" class="mx-4 mt-3">    
                     <h3>{{ user.username }}</h3>
@@ -71,6 +76,10 @@
                     <h6>About me:</h6>
                     <p>{{ user.aboutme }}</p>
                 </div>
+            </div>
+            <div class="my-3">
+                <h3>Previous Involvements</h3>
+                <hr>
             </div>
             <div id="involved-in" class="row mt-4">
                 <div class="col">

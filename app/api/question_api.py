@@ -1,3 +1,4 @@
+# Importing neccessary API modules for flask
 from app import db
 from app.blueprints import main
 from app.models import Question, Tag, Answer
@@ -5,6 +6,7 @@ from app.api.errors import bad_request, error_response
 from flask import jsonify, url_for, request
 from app.controller import PostController, SearchController
 
+# Route for infinite scroll
 @main.route('/api/explore/', methods=['GET'])
 def get_next_questions():
     arguments = request.args
@@ -13,10 +15,12 @@ def get_next_questions():
     else:
         return PostController.get_next_question_set(int(arguments.get('page','')))
 
+# Retrieves filters for client side rendering
 @main.route('/api/filter-retrieve', methods=['GET'])
 def get_filters():
     return jsonify(SearchController.get_tags())
 
+# Adjusts likes
 @main.route('/api/likeadjust/', methods=['PUT'])
 def adjust_likes():
     questionid = request.args.get('qid', type=int)
@@ -35,6 +39,7 @@ def adjust_likes():
         return jsonify({"error": str(e)}), 500
     return jsonify({"likes": post.likes})
 
+# Adjusts likes for answers
 @main.route('/api/likeadjust/answer/', methods=['PUT'])
 def adjust_likes_ans():
     ans_id = request.args.get('ans_id', type=int)
