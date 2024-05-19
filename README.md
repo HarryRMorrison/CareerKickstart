@@ -15,10 +15,10 @@ Set up a virtual environment in Unix:
 1. Use pip or another package manager to install virtualenv package <code>pip install virtualenv</code>
 3. Install a venv environment <code>python -m venv venv</code> and install packages <code>pip install -r requirements.txt</code>
     - Any trouble with the requirements.txt is to do with the environment not pip
-2. Start the virtual environment <code>source virtual-environment/bin/activate</code> This should include flask and all the required packages
+2. Start the virtual environment <code>source venv/bin/activate</code> This should include flask and all the required packages
 Install sqlite
 4. Install sqlite3 <code>sudo apt-get install sqlite</code>
-5. Build the database: <code>flask db init</code>
+5. Build the database: <code>flask db upgrade</code>
 6. To create a database sample with data <code>python "sample-data-generation"</code>
 
 ## Getting Started
