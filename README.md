@@ -14,6 +14,7 @@ The database was designed on the components other help forums have incommon. Que
 Set up a virtual environment in Unix:
 1. Use pip or another package manager to install virtualenv package <code>pip install virtualenv</code>
 3. Install a venv environment <code>python -m venv venv</code> and install packages <code>pip install -r requirements.txt</code>
+    - Any trouble with the requirements.txt is to do with the environment not pip
 2. Start the virtual environment <code>source virtual-environment/bin/activate</code> This should include flask and all the required packages
 Install sqlite
 4. Install sqlite3 <code>sudo apt-get install sqlite</code>
@@ -70,7 +71,7 @@ https://github.com/HarryRMorrison/CareerKickstart
 ## Authors
 
 * **Harry Morrison** 23403634 - [GitHub Profile - HarryRMorrison](https://github.com/HarryRMorrison) & [harryM24](https://github.com/harryM24)
-* **Emily** 23374456 - [GitHub Profile - EmilyRuii](https://github.com/EmilyRuii)
-* **Jessica** 23367247 - [GitHub Profile - JessicaShindunata](https://github.com/JessicaShindunata)
-* **Meg** 23390643 - [GitHub Profile - megGoody](https://github.com/megGoody)
+* **Emily Ong** 23374456 - [GitHub Profile - EmilyRuii](https://github.com/EmilyRuii)
+* **Jessica Shindunata** 23367247 - [GitHub Profile - JessicaShindunata](https://github.com/JessicaShindunata)
+* **Meg Goody** 23390643 - [GitHub Profile - megGoody](https://github.com/megGoody)
 
