@@ -27,22 +27,20 @@
                                     <div class="row g-3">
                                         <h4 class="mb-4 mt-0">Contact detail</h4>
                                         <!-- Username -->
-                                        <form action="{{ url_for('update') }}" method="post" autocomplete="off">
-                                            <div class="col-md-6">
-                                                <label class="form-label">Username*</label>
-                                                <input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required></br></br>
-                                            </div>
-                                            <!-- Email -->
-                                            <div class="col-md-6">
-                                                <label for="inputEmail4" class="form-label">Email *</label>
-                                                <input type="text" name="email" placeholder="Enter Your Email" class="textbox" id="email" required></br></br>
-                                            </div>
-                                            <!-- About me -->
-                                            <div class="col-md-6">
-                                                <label class="form-label">About me *</label>
-                                                <input type="text" name="about me" placeholder="Enter Your Introduction" class="textbox" id="about me" required></br></br>
-                                            </div>
-                                        </form>  
+                                        <div class="col-md-6">
+                                            <label class="form-label">Username*</label>
+                                            <input type="text" class="form-control" placeholder="Enter your username here" aria-label="Username">
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label">Email *</label>
+                                            <input type="email" class="form-control" id="inputEmail4" placeholder="example@gmail.com">
+                                        </div>
+                                        <!-- About me -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">About me *</label>
+                                            <input type="text" class="form-control" placeholder="Enter your introduction here" aria-label="About me">
+                                        </div>
                                     </div> <!-- Row END -->
                                 </div>
                             </div>
@@ -136,10 +134,10 @@
                         </div> <!-- Row END -->
         
                         <!-- button -->
-                        <form action="{{ url_for('update') }}" method="post" autocomplete="off"></form>
-                            <div class="gap-3 d-md-flex justify-content-md-end text-center">
-                                <input type="submit" class="btn" value="Update" style="background-color: blue; color: white">
-                            </div>
+                        <div class="gap-3 d-md-flex justify-content-md-end text-center">
+                            <button type="button" class="btn btn-danger btn-lg">Delete profile</button>
+                            <button type="button" class="btn btn-primary btn-lg">Update profile</button>
+                        </div>
                     </form> <!-- Form END -->
                 </div>
             </div>
